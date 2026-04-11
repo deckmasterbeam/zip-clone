@@ -126,9 +126,6 @@
   cursor: pointer;
   appearance: none;
   -webkit-appearance: none;
-  background-repeat: no-repeat;
-  background-position: right 14px center;
-  padding-right: 36px;
   transition: border-color 0.15s;
 }
 
@@ -328,7 +325,6 @@
 
 .tool-btn--reset-designer {
   background: var(--red-light);
-  border-color: transparent;
 }
 
 .tool-btn--reset-designer:hover {

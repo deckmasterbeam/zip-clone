@@ -4,7 +4,7 @@ import { neon } from "@neondatabase/serverless";
 const UUID_RE =
   /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export const handler = async (req: VercelRequest, res: VercelResponse) => {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }

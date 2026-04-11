@@ -23,11 +23,11 @@ export const cellCenter = (c: Cell) => ({
   y: c.row * (CELL_SIZE + GAP) + CELL_SIZE / 2,
 });
 
-export function gridPx(gridSize: number) {
+export const gridPx = (gridSize: number) => {
   return gridSize * CELL_SIZE + (gridSize - 1) * GAP;
 }
 
-export function getCellAt(x: number, y: number, gridSize: number): Cell | null {
+export const getCellAt = (x: number, y: number, gridSize: number): Cell | null => {
   const col = Math.floor(x / (CELL_SIZE + GAP));
   const row = Math.floor(y / (CELL_SIZE + GAP));
   if (col < 0 || col >= gridSize || row < 0 || row >= gridSize) {
@@ -41,20 +41,20 @@ export function getCellAt(x: number, y: number, gridSize: number): Cell | null {
   return { row, col };
 }
 
-export function buildWallSet(walls: Wall[]): Set<string> {
+export const buildWallSet = (walls: Wall[]): Set<string> => {
   return new Set(walls.map(([a, b]) => wallKey(a, b)));
 }
 
-export function buildWaypointMap(waypoints: Cell[]): Map<string, number> {
+export const buildWaypointMap = (waypoints: Cell[]): Map<string, number> => {
   return new Map(waypoints.map((c, i) => [cellKey(c), i + 1]));
 }
 
-export function extendPath(
+export const extendPath = (
   prev: Cell[],
   cell: Cell,
   wallSet: Set<string>,
   waypointMap: Map<string, number>
-): Cell[] {
+): Cell[] => {
   const key = cellKey(cell);
 
   // Retract one step if landing on the immediately previous cell
@@ -88,11 +88,11 @@ export function extendPath(
   return [...prev, cell];
 }
 
-export function checkWon(
+export const checkWon = (
   path: Cell[],
   totalCells: number,
   lastWaypoint: Cell
-): boolean {
+): boolean => {
   return (
     path.length === totalCells &&
     path.length > 0 &&
@@ -100,7 +100,7 @@ export function checkWon(
   );
 }
 
-export function pathToSvgPoints(path: Cell[]): string {
+export const pathToSvgPoints = (path: Cell[]): string => {
   return path
     .map((c) => {
       const { x, y } = cellCenter(c);
@@ -109,7 +109,7 @@ export function pathToSvgPoints(path: Cell[]): string {
     .join(" ");
 }
 
-export function formatTime(seconds: number): string {
+export const formatTime = (seconds: number): string => {
   const m = Math.floor(seconds / 60);
   const s = Math.floor(seconds % 60);
   const ms = Math.floor((seconds % 1) * 10);

@@ -14,23 +14,21 @@ export type DesignerMode = "waypoints" | "walls";
 
 const WALL_HIT = 20; // px — clickable area centred on each gap
 
-type Props = {
-  gridSize: number;
-  waypoints: Cell[];
-  walls: Wall[];
-  mode: DesignerMode;
-  onWaypointsChange: (waypoints: Cell[]) => void;
-  onWallsChange: (walls: Wall[]) => void;
-};
-
-export function DesignerGrid({
+export const DesignerGrid = ({
   gridSize,
   waypoints,
   walls,
   mode,
   onWaypointsChange,
   onWallsChange,
-}: Props) {
+}: {
+  gridSize: number;
+  waypoints: Cell[];
+  walls: Wall[];
+  mode: DesignerMode;
+  onWaypointsChange: (waypoints: Cell[]) => void;
+  onWallsChange: (walls: Wall[]) => void;
+}) => {
   const px = gridPx(gridSize);
   const waypointMap = buildWaypointMap(waypoints);
   const wallSet = buildWallSet(walls);

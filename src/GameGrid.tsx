@@ -12,17 +12,7 @@ import {
   pathToSvgPoints,
 } from "./gameLogic";
 
-type Props = {
-  puzzle: Puzzle;
-  path: Cell[];
-  isWon: boolean;
-  revealed: boolean;
-  onPathChange: (path: Cell[]) => void;
-  onDragChange: (dragging: boolean) => void;
-  isDragging: boolean;
-};
-
-export function GameGrid({
+export const GameGrid = ({
   puzzle,
   path,
   isWon,
@@ -30,7 +20,15 @@ export function GameGrid({
   onPathChange,
   onDragChange,
   isDragging,
-}: Props) {
+}: {
+  puzzle: Puzzle;
+  path: Cell[];
+  isWon: boolean;
+  revealed: boolean;
+  onPathChange: (path: Cell[]) => void;
+  onDragChange: (dragging: boolean) => void;
+  isDragging: boolean;
+}) => {
   const { gridSize, waypoints } = puzzle;
   const px = gridPx(gridSize);
   const waypointMap = buildWaypointMap(waypoints);

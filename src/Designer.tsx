@@ -2,12 +2,12 @@ import { useState } from "react";
 import type { Cell, Wall } from "./puzzles";
 import { DesignerGrid, type DesignerMode } from "./DesignerGrid";
 
-function toPuzzleTs(
+const toPuzzleTs = (
   name: string,
   gridSize: number,
   waypoints: Cell[],
   walls: Wall[]
-): string {
+): string => {
   const id = crypto.randomUUID();
   const waypointsStr = waypoints
     .map((w) => `    { row: ${w.row}, col: ${w.col} },`)
@@ -36,11 +36,11 @@ ${waypointsStr}
 const MAX_SIZE = 10;
 const MIN_SIZE = 2;
 
-export function Designer({ 
+export const Designer =({ 
   onClose
 }: {
   onClose: () => void;
-}) {
+}) => {
   const [gridSize, setGridSize] = useState(4);
   const [waypoints, setWaypoints] = useState<Cell[]>([]);
   const [walls, setWalls] = useState<Wall[]>([]);

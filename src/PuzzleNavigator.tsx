@@ -1,9 +1,9 @@
 import type { Puzzle } from "./puzzles";
 import { formatTime } from "./gameLogic";
 
-function getBestTime(
+const getBestTime = (
   puzzleId: string
-): { time: number; flawless: boolean } | null {
+): { time: number; flawless: boolean } | null => {
   try {
     const raw = localStorage.getItem(`zip-record:${puzzleId}`);
     if (!raw) {
@@ -19,13 +19,13 @@ function getBestTime(
   }
 }
 
-type Props = {
+export const PuzzleNavigator = ({ 
+  puzzles, activeIndex, onSelect 
+}: {
   puzzles: Puzzle[];
   activeIndex: number;
   onSelect: (index: number) => void;
-};
-
-export function PuzzleNavigator({ puzzles, activeIndex, onSelect }: Props) {
+}) => {
   return (
     <select
       className="level-select"

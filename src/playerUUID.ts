@@ -1,6 +1,6 @@
 const KEY = "zip-player-uuid";
 
-export function getPlayerUUID(): string {
+export const getPlayerUUID = (): string => {
   let uuid = localStorage.getItem(KEY);
   if (!uuid) {
     uuid = crypto.randomUUID();

@@ -12,7 +12,7 @@ type AppMode = "play" | "designer";
 
 type GameState = "idle" | "playing" | "won";
 
-function useTimer(running: boolean) {
+const useTimer = (running: boolean) => {
   const [elapsed, setElapsed] = useState(0);
   const startRef = useRef<number | null>(null);
   const rafRef = useRef<number | null>(null);
@@ -48,7 +48,7 @@ function useTimer(running: boolean) {
   return { elapsed, reset };
 }
 
-function App() {
+const App = () => {
   const [appMode, setAppMode] = useState<AppMode>("play");
   const [gameState, setGameState] = useState<GameState>("idle");
   const [levelIndex, setLevelIndex] = useState(0);
