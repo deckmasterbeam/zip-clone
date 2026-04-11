@@ -33,9 +33,14 @@ export function GameGrid({ puzzle, path, isWon, revealed, onPathChange, onDragCh
   const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect()
     const cell = getCellAt(e.clientX - rect.left, e.clientY - rect.top, gridSize)
-    if (!cell || cellKey(cell) !== cellKey(waypoints[0])) return
+    if (!cell) return
+    const key = cellKey(cell)
+    const lastCell = path[path.length - 1]
+    const isStart = key === cellKey(waypoints[0])
+    const isResume = lastCell && key === cellKey(lastCell)
+    if (!isStart && !isResume) return
     e.currentTarget.setPointerCapture(e.pointerId)
-    onPathChange([cell])
+    if (isStart) onPathChange([cell])
     onDragChange(true)
   }
 

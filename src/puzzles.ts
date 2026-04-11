@@ -86,6 +86,7 @@ export const PUZZLES: Puzzle[] = [
       { row: 1, col: 2 }, // 7
       { row: 2, col: 1 }, // 8
       { row: 1, col: 1 }, // 9
+      { row: 4, col: 3 }, // 10
     ],
   }
 ]
