@@ -1,92 +1,314 @@
-export type Cell = { row: number; col: number }
+export type Cell = { row: number; col: number };
 
-// A wall blocks movement between two adjacent cells.
-export type Wall = [Cell, Cell]
+export type Wall = [Cell, Cell];
 
 export type Puzzle = {
-  id: string
-  name: string
-  gridSize: number
-  waypoints: Cell[]
-  walls?: Wall[]
-}
+  id: string;
+  name: string;
+  gridSize: number;
+  waypoints: Cell[];
+  walls?: Wall[];
+};
 
 export const PUZZLES: Puzzle[] = [
   {
-    id: 'cc56b61d-a27f-4d94-a591-417e9c15881b',
-    name: 'Basic test puzzle',
-    gridSize: 3,
-    waypoints: [
-      { row: 0, col: 0 }, // 1
-      { row: 0, col: 2 }, // 2
-      { row: 1, col: 1 }, // 3
-    ],
-  },
-  {
-    id: 'c9b864f1-f41b-4bba-b204-7cc3987eb232',
-    name: 'Jan 6, 2026',
+    id: "c9b864f1-f41b-4bba-b204-7cc3987eb232",
+    name: "Jan 6, 2026 #293",
     gridSize: 6,
     waypoints: [
-      { row: 2, col: 3 }, // 1
-      { row: 3, col: 3 }, // 2
-      { row: 3, col: 2 }, // 3
-      { row: 4, col: 2 }, // 4
-      { row: 3, col: 1 }, // 5
-      { row: 4, col: 3 }, // 6
-      { row: 3, col: 4 }, // 7
-      { row: 2, col: 4 }, // 8
-      { row: 1, col: 3 }, // 9
-      { row: 2, col: 1 }, // 10
-      { row: 1, col: 2 }, // 11
-      { row: 2, col: 2 }, // 12
+      { row: 2, col: 3 },
+      { row: 3, col: 3 },
+      { row: 3, col: 2 },
+      { row: 4, col: 2 },
+      { row: 3, col: 1 },
+      { row: 4, col: 3 },
+      { row: 3, col: 4 },
+      { row: 2, col: 4 },
+      { row: 1, col: 3 },
+      { row: 2, col: 1 },
+      { row: 1, col: 2 },
+      { row: 2, col: 2 },
     ],
   },
   {
-    id: '42d3f369-47a5-41d3-a127-e556da3a5a26',
-    name: 'Jan 8, 2026',
+    id: "42d3f369-47a5-41d3-a127-e556da3a5a26",
+    name: "Jan 8, 2026 #295",
     gridSize: 8,
     waypoints: [
-      { row: 2, col: 0 }, // 1
-      { row: 4, col: 0 }, // 2
-      { row: 6, col: 7 }, // 3
-      { row: 6, col: 6 }, // 4
-      { row: 5, col: 7 }, // 5
-      { row: 3, col: 7 }, // 6
-      { row: 1, col: 0 }, // 7
-      { row: 1, col: 1 }, // 8
-      { row: 2, col: 2 }, // 9
-      { row: 2, col: 6 }, // 10
-      { row: 4, col: 6 }, // 11
-      { row: 5, col: 5 }, // 12
-      { row: 5, col: 1 }, // 13
-      { row: 5, col: 2 }, // 14
-      { row: 4, col: 2 }, // 15
-      { row: 3, col: 1 }, // 16
-      { row: 3, col: 5 }, // 17
-      { row: 2, col: 5 }, // 18
+      { row: 2, col: 0 },
+      { row: 4, col: 0 },
+      { row: 6, col: 7 },
+      { row: 6, col: 6 },
+      { row: 5, col: 7 },
+      { row: 3, col: 7 },
+      { row: 1, col: 0 },
+      { row: 1, col: 1 },
+      { row: 2, col: 2 },
+      { row: 2, col: 6 },
+      { row: 4, col: 6 },
+      { row: 5, col: 5 },
+      { row: 5, col: 1 },
+      { row: 5, col: 2 },
+      { row: 4, col: 2 },
+      { row: 3, col: 1 },
+      { row: 3, col: 5 },
+      { row: 2, col: 5 },
     ],
     walls: [
-      [{ row: 3, col: 3 }, { row: 4, col: 3 }],
-      [{ row: 3, col: 4 }, { row: 4, col: 4 }],
-      [{ row: 3, col: 3 }, { row: 3, col: 4 }],
-      [{ row: 4, col: 3 }, { row: 4, col: 4 }],
+      [
+        { row: 3, col: 3 },
+        { row: 4, col: 3 },
+      ],
+      [
+        { row: 3, col: 4 },
+        { row: 4, col: 4 },
+      ],
+      [
+        { row: 3, col: 3 },
+        { row: 3, col: 4 },
+      ],
+      [
+        { row: 4, col: 3 },
+        { row: 4, col: 4 },
+      ],
     ],
   },
   {
-    id: 'ae40b2af-4e68-4b2c-a00a-bf98468e773a',
-    name: 'Apr 10, 2026',
+    id: 'd8b659f8-c8f8-4c5a-99f2-aef1e8a0f7bc',
+    name: 'Apr 1, 2026 #380',
     gridSize: 6,
     waypoints: [
-      { row: 4, col: 2 }, // 1
-      { row: 4, col: 1 }, // 2
-      { row: 1, col: 3 }, // 3
-      { row: 1, col: 4 }, // 4
-      { row: 3, col: 4 }, // 5
-      { row: 4, col: 4 }, // 6
-      { row: 1, col: 2 }, // 7
-      { row: 2, col: 1 }, // 8
-      { row: 1, col: 1 }, // 9
-      { row: 4, col: 3 }, // 10
+      { row: 1, col: 2 },
+      { row: 3, col: 4 },
+      { row: 1, col: 1 },
+      { row: 2, col: 1 },
+      { row: 4, col: 4 },
+      { row: 4, col: 3 },
+      { row: 3, col: 3 },
+      { row: 2, col: 2 },
     ],
-  }
-]
+    walls: [
+      [{ row: 1, col: 2 }, { row: 2, col: 2 }],
+      [{ row: 0, col: 1 }, { row: 1, col: 1 }],
+      [{ row: 0, col: 2 }, { row: 1, col: 2 }],
+      [{ row: 0, col: 3 }, { row: 1, col: 3 }],
+      [{ row: 0, col: 4 }, { row: 1, col: 4 }],
+      [{ row: 2, col: 3 }, { row: 2, col: 4 }],
+      [{ row: 3, col: 1 }, { row: 3, col: 2 }],
+      [{ row: 3, col: 3 }, { row: 4, col: 3 }],
+      [{ row: 4, col: 4 }, { row: 5, col: 4 }],
+      [{ row: 4, col: 3 }, { row: 5, col: 3 }],
+      [{ row: 4, col: 2 }, { row: 5, col: 2 }],
+      [{ row: 4, col: 1 }, { row: 5, col: 1 }],
+    ],
+  },
+  {
+    id: '1d755f3b-8fbc-473a-bf01-306cf28d64aa',
+    name: 'Apr 2, 2026 #381',
+    gridSize: 6,
+    waypoints: [
+      { row: 3, col: 2 },
+      { row: 2, col: 3 },
+      { row: 3, col: 1 },
+      { row: 4, col: 2 },
+      { row: 1, col: 2 },
+      { row: 4, col: 3 },
+      { row: 2, col: 4 },
+      { row: 1, col: 3 },
+    ],
+  },
+  {
+    id: '78d3059c-e796-4f67-ac8f-5eb387e71d0c',
+    name: 'Apr 3, 2026 #382',
+    gridSize: 6,
+    waypoints: [
+      { row: 0, col: 0 },
+      { row: 5, col: 5 },
+      { row: 1, col: 4 },
+      { row: 1, col: 1 },
+      { row: 2, col: 3 },
+      { row: 2, col: 2 },
+      { row: 4, col: 1 },
+      { row: 4, col: 4 },
+      { row: 3, col: 3 },
+      { row: 3, col: 2 },
+    ],
+  },
+  {
+    id: '5b61839a-1581-4e64-b9c5-80458c209e2e',
+    name: 'Apr 4, 2026 #383',
+    gridSize: 7,
+    waypoints: [
+      { row: 2, col: 6 },
+      { row: 1, col: 5 },
+      { row: 6, col: 6 },
+      { row: 5, col: 1 },
+      { row: 4, col: 0 },
+      { row: 0, col: 0 },
+    ],
+    walls: [
+      [{ row: 0, col: 3 }, { row: 1, col: 3 }],
+      [{ row: 2, col: 3 }, { row: 2, col: 4 }],
+      [{ row: 2, col: 2 }, { row: 2, col: 3 }],
+      [{ row: 1, col: 4 }, { row: 1, col: 5 }],
+      [{ row: 2, col: 4 }, { row: 2, col: 5 }],
+      [{ row: 1, col: 1 }, { row: 1, col: 2 }],
+      [{ row: 2, col: 1 }, { row: 2, col: 2 }],
+      [{ row: 3, col: 1 }, { row: 3, col: 2 }],
+      [{ row: 3, col: 2 }, { row: 3, col: 3 }],
+      [{ row: 3, col: 3 }, { row: 3, col: 4 }],
+      [{ row: 3, col: 4 }, { row: 3, col: 5 }],
+      [{ row: 4, col: 4 }, { row: 4, col: 5 }],
+      [{ row: 4, col: 3 }, { row: 4, col: 4 }],
+      [{ row: 4, col: 2 }, { row: 4, col: 3 }],
+      [{ row: 4, col: 1 }, { row: 4, col: 2 }],
+      [{ row: 5, col: 1 }, { row: 5, col: 2 }],
+      [{ row: 5, col: 3 }, { row: 6, col: 3 }],
+      [{ row: 5, col: 4 }, { row: 5, col: 5 }],
+    ],
+  },
+  {
+    id: 'a2eb83cb-6abf-44bf-a47b-90115fe32b0e',
+    name: 'Apr 5, 2026 #384',
+    gridSize: 7,
+    waypoints: [
+      { row: 2, col: 0 },
+      { row: 1, col: 1 },
+      { row: 0, col: 2 },
+      { row: 1, col: 5 },
+      { row: 0, col: 4 },
+      { row: 2, col: 6 },
+      { row: 4, col: 0 },
+      { row: 6, col: 2 },
+      { row: 5, col: 1 },
+      { row: 4, col: 6 },
+      { row: 6, col: 4 },
+      { row: 5, col: 5 },
+    ],
+    walls: [
+      [{ row: 1, col: 3 }, { row: 2, col: 3 }],
+      [{ row: 1, col: 3 }, { row: 1, col: 4 }],
+      [{ row: 5, col: 2 }, { row: 5, col: 3 }],
+      [{ row: 4, col: 3 }, { row: 5, col: 3 }],
+    ],
+  },
+  {
+    id: '14663c34-5eb5-48ce-8c18-d95a03633518',
+    name: 'Apr 6, 2026 #385',
+    gridSize: 6,
+    waypoints: [
+      { row: 3, col: 2 },
+      { row: 4, col: 4 },
+      { row: 2, col: 3 },
+      { row: 1, col: 1 },
+    ],
+    walls: [
+      [{ row: 2, col: 2 }, { row: 3, col: 2 }],
+      [{ row: 2, col: 3 }, { row: 3, col: 3 }],
+      [{ row: 2, col: 4 }, { row: 3, col: 4 }],
+      [{ row: 3, col: 4 }, { row: 3, col: 5 }],
+      [{ row: 4, col: 4 }, { row: 4, col: 5 }],
+      [{ row: 4, col: 4 }, { row: 5, col: 4 }],
+      [{ row: 4, col: 3 }, { row: 5, col: 3 }],
+      [{ row: 4, col: 2 }, { row: 5, col: 2 }],
+      [{ row: 4, col: 1 }, { row: 5, col: 1 }],
+      [{ row: 4, col: 0 }, { row: 4, col: 1 }],
+      [{ row: 3, col: 0 }, { row: 3, col: 1 }],
+      [{ row: 2, col: 0 }, { row: 2, col: 1 }],
+      [{ row: 1, col: 0 }, { row: 1, col: 1 }],
+      [{ row: 0, col: 1 }, { row: 1, col: 1 }],
+      [{ row: 0, col: 2 }, { row: 1, col: 2 }],
+      [{ row: 0, col: 3 }, { row: 1, col: 3 }],
+      [{ row: 0, col: 4 }, { row: 1, col: 4 }],
+    ],
+  },
+  {
+    id: '70077e9f-a4fa-4a19-aadf-6466e098feef',
+    name: 'Apr 7, 2026 #386',
+    gridSize: 6,
+    waypoints: [
+      { row: 4, col: 4 },
+      { row: 3, col: 3 },
+      { row: 5, col: 5 },
+      { row: 2, col: 5 },
+      { row: 5, col: 2 },
+      { row: 1, col: 4 },
+      { row: 4, col: 1 },
+    ],
+    walls: [
+      [{ row: 1, col: 0 }, { row: 1, col: 1 }],
+      [{ row: 0, col: 1 }, { row: 1, col: 1 }],
+      [{ row: 0, col: 2 }, { row: 1, col: 2 }],
+      [{ row: 0, col: 3 }, { row: 1, col: 3 }],
+      [{ row: 0, col: 4 }, { row: 1, col: 4 }],
+      [{ row: 1, col: 4 }, { row: 1, col: 5 }],
+      [{ row: 2, col: 4 }, { row: 2, col: 5 }],
+      [{ row: 2, col: 4 }, { row: 3, col: 4 }],
+      [{ row: 2, col: 3 }, { row: 3, col: 3 }],
+      [{ row: 3, col: 2 }, { row: 3, col: 3 }],
+      [{ row: 4, col: 2 }, { row: 4, col: 3 }],
+    ],
+  },
+  {
+    id: 'fd50d48a-0e4a-4ebf-b6c1-7938f108c767',
+    name: 'Apr 8, 2026 #387',
+    gridSize: 6,
+    waypoints: [
+      { row: 3, col: 1 },
+      { row: 4, col: 2 },
+      { row: 2, col: 3 },
+      { row: 1, col: 3 },
+      { row: 2, col: 4 },
+      { row: 3, col: 2 },
+    ],
+    walls: [
+      [{ row: 0, col: 1 }, { row: 1, col: 1 }],
+      [{ row: 1, col: 0 }, { row: 1, col: 1 }],
+      [{ row: 2, col: 0 }, { row: 2, col: 1 }],
+      [{ row: 2, col: 1 }, { row: 3, col: 1 }],
+      [{ row: 2, col: 2 }, { row: 3, col: 2 }],
+      [{ row: 2, col: 3 }, { row: 3, col: 3 }],
+      [{ row: 2, col: 4 }, { row: 3, col: 4 }],
+      [{ row: 3, col: 4 }, { row: 3, col: 5 }],
+      [{ row: 4, col: 4 }, { row: 4, col: 5 }],
+      [{ row: 4, col: 4 }, { row: 5, col: 4 }],
+    ],
+  },
+  {
+    id: '05f437b1-3a94-4205-a01e-657015787e63',
+    name: 'Apr 9, 2026 #388',
+    gridSize: 6,
+    waypoints: [
+      { row: 3, col: 4 },
+      { row: 3, col: 1 },
+      { row: 3, col: 0 },
+      { row: 2, col: 5 },
+      { row: 2, col: 1 },
+      { row: 2, col: 4 },
+      { row: 2, col: 2 },
+    ],
+    walls: [
+      [{ row: 4, col: 1 }, { row: 5, col: 1 }],
+      [{ row: 4, col: 2 }, { row: 5, col: 2 }],
+      [{ row: 4, col: 3 }, { row: 5, col: 3 }],
+      [{ row: 4, col: 4 }, { row: 5, col: 4 }],
+    ],
+  },
+  {
+    id: "ae40b2af-4e68-4b2c-a00a-bf98468e773a",
+    name: "Apr 10, 2026 #389",
+    gridSize: 6,
+    waypoints: [
+      { row: 4, col: 2 },
+      { row: 4, col: 1 },
+      { row: 1, col: 3 },
+      { row: 1, col: 4 },
+      { row: 3, col: 4 },
+      { row: 4, col: 4 },
+      { row: 1, col: 2 },
+      { row: 2, col: 1 },
+      { row: 1, col: 1 },
+      { row: 4, col: 3 },
+    ],
+  },
+];

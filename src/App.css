@@ -17,6 +17,8 @@
   gap: 24px;
   user-select: none;
   -webkit-user-select: none;
+  max-width: calc(100vw - 48px);
+  box-sizing: border-box;
 }
 
 .card-header {
@@ -35,6 +37,11 @@
   font-size: 0.9rem;
   color: var(--ink-muted);
   margin: 0;
+}
+
+@media (max-width: 480px) {
+  .app { padding: 8px; }
+  .card { padding: 16px; gap: 16px; }
 }
 
 /* ── Grid ───────────────────────────────────────────────── */
@@ -152,6 +159,13 @@
 }
 
 /* ── Grid wrapper + overlay ──────────────────────────────── */
+.grid-sizer {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
 .grid-wrapper {
   position: relative;
 }
@@ -314,7 +328,6 @@
 
 .tool-btn--reset-designer {
   background: var(--red-light);
-  color: var(--red-dark);
   border-color: transparent;
 }
 

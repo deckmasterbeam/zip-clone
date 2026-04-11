@@ -1,126 +1,121 @@
-import { useState, useEffect, useRef } from 'react'
-import './App.css'
-import { PUZZLES, type Cell } from './puzzles'
-import { checkWon, formatTime } from './gameLogic'
-import { PuzzleNavigator } from './PuzzleNavigator'
-import { GameGrid } from './GameGrid'
-import { Designer } from './Designer'
-import { DEV } from './env'
-import { getPlayerUUID } from './playerUUID'
+import { useState, useEffect, useRef } from "react";
+import "./App.css";
+import { PUZZLES, type Cell } from "./puzzles";
+import { checkWon, formatTime, gridPx } from "./gameLogic";
+import { PuzzleNavigator } from "./PuzzleNavigator";
+import { GameGrid } from "./GameGrid";
+import { Designer } from "./Designer";
+import { DEV } from "./env";
+import { loadRecord, saveRecord, saveRecordRemote, type PuzzleRecord } from "./saveLoadScore";
 
-type AppMode = 'play' | 'designer'
+type AppMode = "play" | "designer";
 
-type GameState = 'idle' | 'playing' | 'won'
+type GameState = "idle" | "playing" | "won";
 
 function useTimer(running: boolean) {
-  const [elapsed, setElapsed] = useState(0)
-  const startRef = useRef<number | null>(null)
-  const rafRef = useRef<number | null>(null)
+  const [elapsed, setElapsed] = useState(0);
+  const startRef = useRef<number | null>(null);
+  const rafRef = useRef<number | null>(null);
 
   useEffect(() => {
     if (running) {
-      startRef.current = performance.now() - elapsed * 1000
+      startRef.current = performance.now() - elapsed * 1000;
       const tick = () => {
-        setElapsed((performance.now() - startRef.current!) / 1000)
-        rafRef.current = requestAnimationFrame(tick)
-      }
-      rafRef.current = requestAnimationFrame(tick)
+        setElapsed((performance.now() - startRef.current!) / 1000);
+        rafRef.current = requestAnimationFrame(tick);
+      };
+      rafRef.current = requestAnimationFrame(tick);
     } else {
-      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current)
+      if (rafRef.current !== null) {
+        cancelAnimationFrame(rafRef.current);
+      }
     }
-    return () => { if (rafRef.current !== null) cancelAnimationFrame(rafRef.current) }
-  }, [running])
+    return () => {
+      if (rafRef.current !== null) {
+        cancelAnimationFrame(rafRef.current);
+      }
+    };
+  }, [running]);
 
   const reset = () => {
-    if (rafRef.current !== null) cancelAnimationFrame(rafRef.current)
-    startRef.current = null
-    setElapsed(0)
-  }
+    if (rafRef.current !== null) {
+      cancelAnimationFrame(rafRef.current);
+    }
+    startRef.current = null;
+    setElapsed(0);
+  };
 
-  return { elapsed, reset }
-}
-
-type PuzzleRecord = { bestTime: number; flawless: boolean; }
-
-function loadRecord(puzzleId: string): PuzzleRecord | null {
-  try {
-    const raw = localStorage.getItem(`zip-record:${puzzleId}`)
-    return raw ? (JSON.parse(raw) as PuzzleRecord) : null
-  } catch {
-    return null
-  }
-}
-
-function saveRecord(puzzleId: string, time: number, flawless: boolean): PuzzleRecord {
-  const prev = loadRecord(puzzleId)
-  const record: PuzzleRecord = {
-    bestTime: prev ? Math.min(prev.bestTime, time) : time,
-    flawless,
-  }
-  localStorage.setItem(`zip-record:${puzzleId}`, JSON.stringify(record))
-  return record
+  return { elapsed, reset };
 }
 
 function App() {
-  const [appMode, setAppMode] = useState<AppMode>('play')
-  const [gameState, setGameState] = useState<GameState>('idle')
-  const [levelIndex, setLevelIndex] = useState(0)
-  const [path, setPath] = useState<Cell[]>([])
-  const [isDragging, setIsDragging] = useState(false)
-  const [record, setRecord] = useState<PuzzleRecord | null>(() => loadRecord(PUZZLES[0].id))
-  const hasRetractedRef = useRef(false)
-
-  const puzzle = PUZZLES[levelIndex]
-  const { gridSize, waypoints } = puzzle
-  const totalCells = gridSize * gridSize
-  const isWon = checkWon(path, totalCells, waypoints[waypoints.length - 1])
-
-  const { elapsed, reset: resetTimer } = useTimer(gameState === 'playing')
+  const [appMode, setAppMode] = useState<AppMode>("play");
+  const [gameState, setGameState] = useState<GameState>("idle");
+  const [levelIndex, setLevelIndex] = useState(0);
+  const [path, setPath] = useState<Cell[]>([]);
+  const [isDragging, setIsDragging] = useState(false);
+  const [record, setRecord] = useState<PuzzleRecord | null>(() =>
+    loadRecord(PUZZLES[0].id)
+  );
+  const hasRetractedRef = useRef(false);
+  const gridSizerRef = useRef<HTMLDivElement>(null);
+  const [availableWidth, setAvailableWidth] = useState(9999);
 
   useEffect(() => {
-    if (isWon && gameState === 'playing') {
-      setGameState('won')
-      const flawless = !hasRetractedRef.current
-      setRecord(saveRecord(puzzle.id, elapsed, flawless))
+    if (!gridSizerRef.current) {
+      return;
+    }
+    const ro = new ResizeObserver(([e]) =>
+      setAvailableWidth(e.contentRect.width)
+    );
+    ro.observe(gridSizerRef.current);
+    return () => ro.disconnect();
+  }, []);
+
+  const puzzle = PUZZLES[levelIndex];
+  const { gridSize, waypoints } = puzzle;
+  const pxSize = gridPx(gridSize);
+  const scale = Math.min(1, availableWidth / pxSize);
+  const totalCells = gridSize * gridSize;
+  const isWon = checkWon(path, totalCells, waypoints[waypoints.length - 1]);
+
+  const { elapsed, reset: resetTimer } = useTimer(gameState === "playing");
+
+  useEffect(() => {
+    if (isWon && gameState === "playing") {
+      setGameState("won");
+      const flawless = !hasRetractedRef.current;
+      setRecord(saveRecord(puzzle.id, elapsed, flawless));
       if (!DEV) {
-        fetch('/api/record-completion', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            puzzleId: puzzle.id,
-            timeSeconds: elapsed,
-            flawless,
-            playerUuid: getPlayerUUID(),
-          }),
-        }).catch(() => { /* non-blocking */ })
+        saveRecordRemote(puzzle.id, elapsed, flawless);
       }
     }
-  }, [isWon, gameState])
+  }, [isWon, gameState]);
 
   const startGame = () => {
-    setPath([])
-    setIsDragging(false)
-    resetTimer()
-    hasRetractedRef.current = false
-    setGameState('playing')
-  }
+    setPath([]);
+    setIsDragging(false);
+    resetTimer();
+    hasRetractedRef.current = false;
+    setGameState("playing");
+  };
 
   const selectLevel = (i: number) => {
-    setLevelIndex(i)
-    setPath([])
-    setIsDragging(false)
-    resetTimer()
-    setGameState('idle')
-    setRecord(loadRecord(PUZZLES[i].id))
-  }
+    setLevelIndex(i);
+    setPath([]);
+    setIsDragging(false);
+    resetTimer();
+    setGameState("idle");
+    setRecord(loadRecord(PUZZLES[i].id));
+  };
 
   const reset = () => {
-    setPath([])
-    setIsDragging(false)
-    resetTimer()
-    hasRetractedRef.current = false
-    setGameState('idle')
-  }
+    setPath([]);
+    setIsDragging(false);
+    resetTimer();
+    hasRetractedRef.current = false;
+    setGameState("idle");
+  };
 
   return (
     <div className="app">
@@ -132,7 +127,7 @@ function App() {
           </p>
         </div>
 
-        {appMode === 'play' ? (
+        {appMode === "play" ? (
           <>
             <PuzzleNavigator
               puzzles={PUZZLES}
@@ -150,38 +145,64 @@ function App() {
               )}
             </div>
 
-            <div className="grid-wrapper">
-              <GameGrid
-                puzzle={puzzle}
-                path={path}
-                isWon={isWon}
-                isDragging={isDragging}
-                revealed={gameState !== 'idle'}
-                onPathChange={newPath => {
-                  if (newPath.length < path.length) hasRetractedRef.current = true
-                  setPath(newPath)
+            <div
+              ref={gridSizerRef}
+              className="grid-sizer"
+              style={{ height: pxSize * scale }}
+            >
+              <div
+                className="grid-wrapper"
+                style={{
+                  transform: `scale(${scale})`,
+                  transformOrigin: "top center",
+                  width: pxSize,
+                  height: pxSize,
                 }}
-                onDragChange={setIsDragging}
-              />
-              {gameState === 'idle' && (
-                <div className="grid-overlay">
-                  <button className="btn-start" onClick={startGame}>Start</button>
-                </div>
-              )}
+              >
+                <GameGrid
+                  puzzle={puzzle}
+                  path={path}
+                  isWon={isWon}
+                  isDragging={isDragging}
+                  revealed={gameState !== "idle"}
+                  onPathChange={(newPath) => {
+                    if (newPath.length < path.length)
+                      hasRetractedRef.current = true;
+                    setPath(newPath);
+                  }}
+                  onDragChange={setIsDragging}
+                />
+                {gameState === "idle" && (
+                  <div className="grid-overlay">
+                    <button className="btn-start" onClick={startGame}>
+                      Start
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
 
             <div className="card-footer">
               {isWon ? (
                 <p className="status status--won">
-                  Solved!{record?.flawless ? ' ✦ Flawless' : ''}
+                  Solved!{record?.flawless ? " ✦ Flawless" : ""}
                 </p>
               ) : (
-                <p className="status">{gameState === 'idle' ? '\u00a0' : `${path.length} / ${totalCells} cells`}</p>
+                <p className="status">
+                  {gameState === "idle"
+                    ? "\u00a0"
+                    : `${path.length} / ${totalCells} cells`}
+                </p>
               )}
               <div className="footer-actions">
-                <button className="btn-reset" onClick={reset}>Reset</button>
+                <button className="btn-reset" onClick={reset}>
+                  Reset
+                </button>
                 {DEV && (
-                  <button className="btn-designer" onClick={() => setAppMode('designer')}>
+                  <button
+                    className="btn-designer"
+                    onClick={() => setAppMode("designer")}
+                  >
                     Designer
                   </button>
                 )}
@@ -189,11 +210,11 @@ function App() {
             </div>
           </>
         ) : DEV ? (
-          <Designer onClose={() => setAppMode('play')} />
+          <Designer onClose={() => setAppMode("play")} />
         ) : null}
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
