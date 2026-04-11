@@ -1,4 +1,4 @@
-import type { Cell, Wall } from "./puzzles";
+import type { Cell, Wall } from './puzzles';
 import {
   CELL_SIZE,
   GAP,
@@ -8,9 +8,9 @@ import {
   gridPx,
   buildWallSet,
   buildWaypointMap,
-} from "./gameLogic";
+} from './gameLogic';
 
-export type DesignerMode = "waypoints" | "walls";
+export type DesignerMode = 'waypoints' | 'walls';
 
 const WALL_HIT = 20; // px — clickable area centred on each gap
 
@@ -66,12 +66,12 @@ export const DesignerGrid = ({
           const waypointLabel = waypointMap.get(key);
           const isWaypoint = waypointLabel !== undefined;
           const classes = [
-            "cell",
-            isWaypoint && "cell--waypoint",
-            mode === "waypoints" && "cell--clickable",
+            'cell',
+            isWaypoint && 'cell--waypoint',
+            mode === 'waypoints' && 'cell--clickable',
           ]
             .filter(Boolean)
-            .join(" ");
+            .join(' ');
           return (
             <div
               key={key}
@@ -84,9 +84,7 @@ export const DesignerGrid = ({
               }}
               onClick={() => handleCellClick(cell)}
             >
-              {isWaypoint && (
-                <span className="cell-label">{waypointLabel}</span>
-              )}
+              {isWaypoint && <span className="cell-label">{waypointLabel}</span>}
             </div>
           );
         })
@@ -104,10 +102,7 @@ export const DesignerGrid = ({
               className="wall"
               style={{
                 left: left.col * (CELL_SIZE + GAP),
-                top:
-                  (top.row + 1) * (CELL_SIZE + GAP) -
-                  GAP / 2 -
-                  WALL_THICKNESS / 2,
+                top: (top.row + 1) * (CELL_SIZE + GAP) - GAP / 2 - WALL_THICKNESS / 2,
                 width: CELL_SIZE,
                 height: WALL_THICKNESS,
               }}
@@ -119,10 +114,7 @@ export const DesignerGrid = ({
               key={i}
               className="wall"
               style={{
-                left:
-                  (left.col + 1) * (CELL_SIZE + GAP) -
-                  GAP / 2 -
-                  WALL_THICKNESS / 2,
+                left: (left.col + 1) * (CELL_SIZE + GAP) - GAP / 2 - WALL_THICKNESS / 2,
                 top: top.row * (CELL_SIZE + GAP),
                 width: WALL_THICKNESS,
                 height: CELL_SIZE,
@@ -133,7 +125,7 @@ export const DesignerGrid = ({
       })}
 
       {/* Wall hit areas — only rendered in walls mode */}
-      {mode === "walls" &&
+      {mode === 'walls' &&
         Array.from({ length: gridSize }, (_, row) =>
           Array.from({ length: gridSize - 1 }, (_, col) => {
             const a = { row, col };
@@ -142,7 +134,7 @@ export const DesignerGrid = ({
             return (
               <div
                 key={`v-${row}-${col}`}
-                className={`wall-hit${active ? " wall-hit--active" : ""}`}
+                className={`wall-hit${active ? ' wall-hit--active' : ''}`}
                 style={{
                   left: (col + 1) * (CELL_SIZE + GAP) - GAP / 2 - WALL_HIT / 2,
                   top: row * (CELL_SIZE + GAP),
@@ -155,7 +147,7 @@ export const DesignerGrid = ({
           })
         )}
 
-      {mode === "walls" &&
+      {mode === 'walls' &&
         Array.from({ length: gridSize - 1 }, (_, row) =>
           Array.from({ length: gridSize }, (_, col) => {
             const a = { row, col };
@@ -164,7 +156,7 @@ export const DesignerGrid = ({
             return (
               <div
                 key={`h-${row}-${col}`}
-                className={`wall-hit${active ? " wall-hit--active" : ""}`}
+                className={`wall-hit${active ? ' wall-hit--active' : ''}`}
                 style={{
                   left: col * (CELL_SIZE + GAP),
                   top: (row + 1) * (CELL_SIZE + GAP) - GAP / 2 - WALL_HIT / 2,
@@ -178,4 +170,4 @@ export const DesignerGrid = ({
         )}
     </div>
   );
-}
+};

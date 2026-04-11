@@ -12,8 +12,8 @@ export type Puzzle = {
 
 export const PUZZLES: Puzzle[] = [
   {
-    id: "ae40b2af-4e68-4b2c-a00a-bf98468e773a",
-    name: "Apr 10, 2026 #389",
+    id: 'ae40b2af-4e68-4b2c-a00a-bf98468e773a',
+    name: 'Apr 10, 2026 #389',
     gridSize: 6,
     waypoints: [
       { row: 4, col: 2 },
@@ -42,10 +42,22 @@ export const PUZZLES: Puzzle[] = [
       { row: 2, col: 2 },
     ],
     walls: [
-      [{ row: 4, col: 1 }, { row: 5, col: 1 }],
-      [{ row: 4, col: 2 }, { row: 5, col: 2 }],
-      [{ row: 4, col: 3 }, { row: 5, col: 3 }],
-      [{ row: 4, col: 4 }, { row: 5, col: 4 }],
+      [
+        { row: 4, col: 1 },
+        { row: 5, col: 1 },
+      ],
+      [
+        { row: 4, col: 2 },
+        { row: 5, col: 2 },
+      ],
+      [
+        { row: 4, col: 3 },
+        { row: 5, col: 3 },
+      ],
+      [
+        { row: 4, col: 4 },
+        { row: 5, col: 4 },
+      ],
     ],
   },
   {
@@ -61,16 +73,46 @@ export const PUZZLES: Puzzle[] = [
       { row: 3, col: 2 },
     ],
     walls: [
-      [{ row: 0, col: 1 }, { row: 1, col: 1 }],
-      [{ row: 1, col: 0 }, { row: 1, col: 1 }],
-      [{ row: 2, col: 0 }, { row: 2, col: 1 }],
-      [{ row: 2, col: 1 }, { row: 3, col: 1 }],
-      [{ row: 2, col: 2 }, { row: 3, col: 2 }],
-      [{ row: 2, col: 3 }, { row: 3, col: 3 }],
-      [{ row: 2, col: 4 }, { row: 3, col: 4 }],
-      [{ row: 3, col: 4 }, { row: 3, col: 5 }],
-      [{ row: 4, col: 4 }, { row: 4, col: 5 }],
-      [{ row: 4, col: 4 }, { row: 5, col: 4 }],
+      [
+        { row: 0, col: 1 },
+        { row: 1, col: 1 },
+      ],
+      [
+        { row: 1, col: 0 },
+        { row: 1, col: 1 },
+      ],
+      [
+        { row: 2, col: 0 },
+        { row: 2, col: 1 },
+      ],
+      [
+        { row: 2, col: 1 },
+        { row: 3, col: 1 },
+      ],
+      [
+        { row: 2, col: 2 },
+        { row: 3, col: 2 },
+      ],
+      [
+        { row: 2, col: 3 },
+        { row: 3, col: 3 },
+      ],
+      [
+        { row: 2, col: 4 },
+        { row: 3, col: 4 },
+      ],
+      [
+        { row: 3, col: 4 },
+        { row: 3, col: 5 },
+      ],
+      [
+        { row: 4, col: 4 },
+        { row: 4, col: 5 },
+      ],
+      [
+        { row: 4, col: 4 },
+        { row: 5, col: 4 },
+      ],
     ],
   },
   {
@@ -87,17 +129,50 @@ export const PUZZLES: Puzzle[] = [
       { row: 4, col: 1 },
     ],
     walls: [
-      [{ row: 1, col: 0 }, { row: 1, col: 1 }],
-      [{ row: 0, col: 1 }, { row: 1, col: 1 }],
-      [{ row: 0, col: 2 }, { row: 1, col: 2 }],
-      [{ row: 0, col: 3 }, { row: 1, col: 3 }],
-      [{ row: 0, col: 4 }, { row: 1, col: 4 }],
-      [{ row: 1, col: 4 }, { row: 1, col: 5 }],
-      [{ row: 2, col: 4 }, { row: 2, col: 5 }],
-      [{ row: 2, col: 4 }, { row: 3, col: 4 }],
-      [{ row: 2, col: 3 }, { row: 3, col: 3 }],
-      [{ row: 3, col: 2 }, { row: 3, col: 3 }],
-      [{ row: 4, col: 2 }, { row: 4, col: 3 }],
+      [
+        { row: 1, col: 0 },
+        { row: 1, col: 1 },
+      ],
+      [
+        { row: 0, col: 1 },
+        { row: 1, col: 1 },
+      ],
+      [
+        { row: 0, col: 2 },
+        { row: 1, col: 2 },
+      ],
+      [
+        { row: 0, col: 3 },
+        { row: 1, col: 3 },
+      ],
+      [
+        { row: 0, col: 4 },
+        { row: 1, col: 4 },
+      ],
+      [
+        { row: 1, col: 4 },
+        { row: 1, col: 5 },
+      ],
+      [
+        { row: 2, col: 4 },
+        { row: 2, col: 5 },
+      ],
+      [
+        { row: 2, col: 4 },
+        { row: 3, col: 4 },
+      ],
+      [
+        { row: 2, col: 3 },
+        { row: 3, col: 3 },
+      ],
+      [
+        { row: 3, col: 2 },
+        { row: 3, col: 3 },
+      ],
+      [
+        { row: 4, col: 2 },
+        { row: 4, col: 3 },
+      ],
     ],
   },
   {
@@ -111,23 +186,74 @@ export const PUZZLES: Puzzle[] = [
       { row: 1, col: 1 },
     ],
     walls: [
-      [{ row: 2, col: 2 }, { row: 3, col: 2 }],
-      [{ row: 2, col: 3 }, { row: 3, col: 3 }],
-      [{ row: 2, col: 4 }, { row: 3, col: 4 }],
-      [{ row: 3, col: 4 }, { row: 3, col: 5 }],
-      [{ row: 4, col: 4 }, { row: 4, col: 5 }],
-      [{ row: 4, col: 4 }, { row: 5, col: 4 }],
-      [{ row: 4, col: 3 }, { row: 5, col: 3 }],
-      [{ row: 4, col: 2 }, { row: 5, col: 2 }],
-      [{ row: 4, col: 1 }, { row: 5, col: 1 }],
-      [{ row: 4, col: 0 }, { row: 4, col: 1 }],
-      [{ row: 3, col: 0 }, { row: 3, col: 1 }],
-      [{ row: 2, col: 0 }, { row: 2, col: 1 }],
-      [{ row: 1, col: 0 }, { row: 1, col: 1 }],
-      [{ row: 0, col: 1 }, { row: 1, col: 1 }],
-      [{ row: 0, col: 2 }, { row: 1, col: 2 }],
-      [{ row: 0, col: 3 }, { row: 1, col: 3 }],
-      [{ row: 0, col: 4 }, { row: 1, col: 4 }],
+      [
+        { row: 2, col: 2 },
+        { row: 3, col: 2 },
+      ],
+      [
+        { row: 2, col: 3 },
+        { row: 3, col: 3 },
+      ],
+      [
+        { row: 2, col: 4 },
+        { row: 3, col: 4 },
+      ],
+      [
+        { row: 3, col: 4 },
+        { row: 3, col: 5 },
+      ],
+      [
+        { row: 4, col: 4 },
+        { row: 4, col: 5 },
+      ],
+      [
+        { row: 4, col: 4 },
+        { row: 5, col: 4 },
+      ],
+      [
+        { row: 4, col: 3 },
+        { row: 5, col: 3 },
+      ],
+      [
+        { row: 4, col: 2 },
+        { row: 5, col: 2 },
+      ],
+      [
+        { row: 4, col: 1 },
+        { row: 5, col: 1 },
+      ],
+      [
+        { row: 4, col: 0 },
+        { row: 4, col: 1 },
+      ],
+      [
+        { row: 3, col: 0 },
+        { row: 3, col: 1 },
+      ],
+      [
+        { row: 2, col: 0 },
+        { row: 2, col: 1 },
+      ],
+      [
+        { row: 1, col: 0 },
+        { row: 1, col: 1 },
+      ],
+      [
+        { row: 0, col: 1 },
+        { row: 1, col: 1 },
+      ],
+      [
+        { row: 0, col: 2 },
+        { row: 1, col: 2 },
+      ],
+      [
+        { row: 0, col: 3 },
+        { row: 1, col: 3 },
+      ],
+      [
+        { row: 0, col: 4 },
+        { row: 1, col: 4 },
+      ],
     ],
   },
   {
@@ -149,10 +275,22 @@ export const PUZZLES: Puzzle[] = [
       { row: 5, col: 5 },
     ],
     walls: [
-      [{ row: 1, col: 3 }, { row: 2, col: 3 }],
-      [{ row: 1, col: 3 }, { row: 1, col: 4 }],
-      [{ row: 5, col: 2 }, { row: 5, col: 3 }],
-      [{ row: 4, col: 3 }, { row: 5, col: 3 }],
+      [
+        { row: 1, col: 3 },
+        { row: 2, col: 3 },
+      ],
+      [
+        { row: 1, col: 3 },
+        { row: 1, col: 4 },
+      ],
+      [
+        { row: 5, col: 2 },
+        { row: 5, col: 3 },
+      ],
+      [
+        { row: 4, col: 3 },
+        { row: 5, col: 3 },
+      ],
     ],
   },
   {
@@ -168,24 +306,78 @@ export const PUZZLES: Puzzle[] = [
       { row: 0, col: 0 },
     ],
     walls: [
-      [{ row: 0, col: 3 }, { row: 1, col: 3 }],
-      [{ row: 2, col: 3 }, { row: 2, col: 4 }],
-      [{ row: 2, col: 2 }, { row: 2, col: 3 }],
-      [{ row: 1, col: 4 }, { row: 1, col: 5 }],
-      [{ row: 2, col: 4 }, { row: 2, col: 5 }],
-      [{ row: 1, col: 1 }, { row: 1, col: 2 }],
-      [{ row: 2, col: 1 }, { row: 2, col: 2 }],
-      [{ row: 3, col: 1 }, { row: 3, col: 2 }],
-      [{ row: 3, col: 2 }, { row: 3, col: 3 }],
-      [{ row: 3, col: 3 }, { row: 3, col: 4 }],
-      [{ row: 3, col: 4 }, { row: 3, col: 5 }],
-      [{ row: 4, col: 4 }, { row: 4, col: 5 }],
-      [{ row: 4, col: 3 }, { row: 4, col: 4 }],
-      [{ row: 4, col: 2 }, { row: 4, col: 3 }],
-      [{ row: 4, col: 1 }, { row: 4, col: 2 }],
-      [{ row: 5, col: 1 }, { row: 5, col: 2 }],
-      [{ row: 5, col: 3 }, { row: 6, col: 3 }],
-      [{ row: 5, col: 4 }, { row: 5, col: 5 }],
+      [
+        { row: 0, col: 3 },
+        { row: 1, col: 3 },
+      ],
+      [
+        { row: 2, col: 3 },
+        { row: 2, col: 4 },
+      ],
+      [
+        { row: 2, col: 2 },
+        { row: 2, col: 3 },
+      ],
+      [
+        { row: 1, col: 4 },
+        { row: 1, col: 5 },
+      ],
+      [
+        { row: 2, col: 4 },
+        { row: 2, col: 5 },
+      ],
+      [
+        { row: 1, col: 1 },
+        { row: 1, col: 2 },
+      ],
+      [
+        { row: 2, col: 1 },
+        { row: 2, col: 2 },
+      ],
+      [
+        { row: 3, col: 1 },
+        { row: 3, col: 2 },
+      ],
+      [
+        { row: 3, col: 2 },
+        { row: 3, col: 3 },
+      ],
+      [
+        { row: 3, col: 3 },
+        { row: 3, col: 4 },
+      ],
+      [
+        { row: 3, col: 4 },
+        { row: 3, col: 5 },
+      ],
+      [
+        { row: 4, col: 4 },
+        { row: 4, col: 5 },
+      ],
+      [
+        { row: 4, col: 3 },
+        { row: 4, col: 4 },
+      ],
+      [
+        { row: 4, col: 2 },
+        { row: 4, col: 3 },
+      ],
+      [
+        { row: 4, col: 1 },
+        { row: 4, col: 2 },
+      ],
+      [
+        { row: 5, col: 1 },
+        { row: 5, col: 2 },
+      ],
+      [
+        { row: 5, col: 3 },
+        { row: 6, col: 3 },
+      ],
+      [
+        { row: 5, col: 4 },
+        { row: 5, col: 5 },
+      ],
     ],
   },
   {
@@ -235,23 +427,59 @@ export const PUZZLES: Puzzle[] = [
       { row: 2, col: 2 },
     ],
     walls: [
-      [{ row: 1, col: 2 }, { row: 2, col: 2 }],
-      [{ row: 0, col: 1 }, { row: 1, col: 1 }],
-      [{ row: 0, col: 2 }, { row: 1, col: 2 }],
-      [{ row: 0, col: 3 }, { row: 1, col: 3 }],
-      [{ row: 0, col: 4 }, { row: 1, col: 4 }],
-      [{ row: 2, col: 3 }, { row: 2, col: 4 }],
-      [{ row: 3, col: 1 }, { row: 3, col: 2 }],
-      [{ row: 3, col: 3 }, { row: 4, col: 3 }],
-      [{ row: 4, col: 4 }, { row: 5, col: 4 }],
-      [{ row: 4, col: 3 }, { row: 5, col: 3 }],
-      [{ row: 4, col: 2 }, { row: 5, col: 2 }],
-      [{ row: 4, col: 1 }, { row: 5, col: 1 }],
+      [
+        { row: 1, col: 2 },
+        { row: 2, col: 2 },
+      ],
+      [
+        { row: 0, col: 1 },
+        { row: 1, col: 1 },
+      ],
+      [
+        { row: 0, col: 2 },
+        { row: 1, col: 2 },
+      ],
+      [
+        { row: 0, col: 3 },
+        { row: 1, col: 3 },
+      ],
+      [
+        { row: 0, col: 4 },
+        { row: 1, col: 4 },
+      ],
+      [
+        { row: 2, col: 3 },
+        { row: 2, col: 4 },
+      ],
+      [
+        { row: 3, col: 1 },
+        { row: 3, col: 2 },
+      ],
+      [
+        { row: 3, col: 3 },
+        { row: 4, col: 3 },
+      ],
+      [
+        { row: 4, col: 4 },
+        { row: 5, col: 4 },
+      ],
+      [
+        { row: 4, col: 3 },
+        { row: 5, col: 3 },
+      ],
+      [
+        { row: 4, col: 2 },
+        { row: 5, col: 2 },
+      ],
+      [
+        { row: 4, col: 1 },
+        { row: 5, col: 1 },
+      ],
     ],
   },
   {
-    id: "42d3f369-47a5-41d3-a127-e556da3a5a26",
-    name: "Jan 8, 2026 #295",
+    id: '42d3f369-47a5-41d3-a127-e556da3a5a26',
+    name: 'Jan 8, 2026 #295',
     gridSize: 8,
     waypoints: [
       { row: 2, col: 0 },

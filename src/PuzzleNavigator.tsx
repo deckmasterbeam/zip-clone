@@ -1,9 +1,7 @@
-import type { Puzzle } from "./puzzles";
-import { formatTime } from "./gameLogic";
+import type { Puzzle } from './puzzles';
+import { formatTime } from './gameLogic';
 
-const getBestTime = (
-  puzzleId: string
-): { time: number; flawless: boolean } | null => {
+const getBestTime = (puzzleId: string): { time: number; flawless: boolean } | null => {
   try {
     const raw = localStorage.getItem(`zip-record:${puzzleId}`);
     if (!raw) {
@@ -17,10 +15,12 @@ const getBestTime = (
   } catch {
     return null;
   }
-}
+};
 
-export const PuzzleNavigator = ({ 
-  puzzles, activeIndex, onSelect 
+export const PuzzleNavigator = ({
+  puzzles,
+  activeIndex,
+  onSelect,
 }: {
   puzzles: Puzzle[];
   activeIndex: number;
@@ -36,8 +36,8 @@ export const PuzzleNavigator = ({
       {puzzles.map((p, i) => {
         const best = getBestTime(p.id);
         const completed = best !== null;
-        const bestTimeStr = completed ? `${formatTime(best!.time)}` : "";
-        const icon = completed ? (best!.flawless ? "✦ " : "✓ ") : "";
+        const bestTimeStr = completed ? `${formatTime(best!.time)}` : '';
+        const icon = completed ? (best!.flawless ? '✦ ' : '✓ ') : '';
 
         return (
           <option key={i} value={i}>
@@ -47,4 +47,4 @@ export const PuzzleNavigator = ({
       })}
     </select>
   );
-}
+};

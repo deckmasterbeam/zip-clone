@@ -1,4 +1,4 @@
-import type { Cell, Wall } from "./puzzles";
+import type { Cell, Wall } from './puzzles';
 
 export const CELL_SIZE = 80;
 export const GAP = 8;
@@ -10,9 +10,7 @@ export const cellKey = (c: Cell) => `${c.row},${c.col}`;
 export const wallKey = (a: Cell, b: Cell) => {
   const ak = a.row * 100 + a.col;
   const bk = b.row * 100 + b.col;
-  return ak < bk
-    ? `${cellKey(a)}|${cellKey(b)}`
-    : `${cellKey(b)}|${cellKey(a)}`;
+  return ak < bk ? `${cellKey(a)}|${cellKey(b)}` : `${cellKey(b)}|${cellKey(a)}`;
 };
 
 export const isAdjacent = (a: Cell, b: Cell) =>
@@ -25,7 +23,7 @@ export const cellCenter = (c: Cell) => ({
 
 export const gridPx = (gridSize: number) => {
   return gridSize * CELL_SIZE + (gridSize - 1) * GAP;
-}
+};
 
 export const getCellAt = (x: number, y: number, gridSize: number): Cell | null => {
   const col = Math.floor(x / (CELL_SIZE + GAP));
@@ -39,15 +37,15 @@ export const getCellAt = (x: number, y: number, gridSize: number): Cell | null =
     return null;
   }
   return { row, col };
-}
+};
 
 export const buildWallSet = (walls: Wall[]): Set<string> => {
   return new Set(walls.map(([a, b]) => wallKey(a, b)));
-}
+};
 
 export const buildWaypointMap = (waypoints: Cell[]): Map<string, number> => {
   return new Map(waypoints.map((c, i) => [cellKey(c), i + 1]));
-}
+};
 
 export const extendPath = (
   prev: Cell[],
@@ -77,28 +75,22 @@ export const extendPath = (
   // Waypoints must be visited in sequence
   const wLabel = waypointMap.get(key);
   if (wLabel !== undefined) {
-    const visitedWaypoints = prev.filter((c) =>
-      waypointMap.has(cellKey(c))
-    ).length;
+    const visitedWaypoints = prev.filter((c) => waypointMap.has(cellKey(c))).length;
     if (wLabel !== visitedWaypoints + 1) {
       return prev;
     }
   }
 
   return [...prev, cell];
-}
+};
 
-export const checkWon = (
-  path: Cell[],
-  totalCells: number,
-  lastWaypoint: Cell
-): boolean => {
+export const checkWon = (path: Cell[], totalCells: number, lastWaypoint: Cell): boolean => {
   return (
     path.length === totalCells &&
     path.length > 0 &&
     cellKey(path[path.length - 1]) === cellKey(lastWaypoint)
   );
-}
+};
 
 export const pathToSvgPoints = (path: Cell[]): string => {
   return path
@@ -106,12 +98,12 @@ export const pathToSvgPoints = (path: Cell[]): string => {
       const { x, y } = cellCenter(c);
       return `${x},${y}`;
     })
-    .join(" ");
-}
+    .join(' ');
+};
 
 export const formatTime = (seconds: number): string => {
   const m = Math.floor(seconds / 60);
   const s = Math.floor(seconds % 60);
   const ms = Math.floor((seconds % 1) * 10);
-  return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}.${ms}`;
-}
+  return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}.${ms}`;
+};
