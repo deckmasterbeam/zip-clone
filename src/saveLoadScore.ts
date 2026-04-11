@@ -1,4 +1,4 @@
-import { getPlayerUUID } from "./playerUUID";
+import { getPlayerUUID } from './playerUUID';
 
 export type PuzzleRecord = { bestTime: number; flawless: boolean };
 
@@ -9,13 +9,9 @@ export const loadRecord = (puzzleId: string): PuzzleRecord | null => {
   } catch {
     return null;
   }
-}
+};
 
-export const saveRecord = (
-  puzzleId: string,
-  time: number,
-  flawless: boolean
-): PuzzleRecord => {
+export const saveRecord = (puzzleId: string, time: number, flawless: boolean): PuzzleRecord => {
   const prev = loadRecord(puzzleId);
   const record: PuzzleRecord = {
     bestTime: prev ? Math.min(prev.bestTime, time) : time,
@@ -23,12 +19,12 @@ export const saveRecord = (
   };
   localStorage.setItem(`zip-record:${puzzleId}`, JSON.stringify(record));
   return record;
-}
+};
 
 export const saveRecordRemote = (puzzleId: string, elapsed: number, flawless: boolean) => {
-  fetch("/api/record-completion", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
+  fetch('/api/record-completion', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       puzzleId: puzzleId,
       timeSeconds: elapsed,
@@ -38,4 +34,4 @@ export const saveRecordRemote = (puzzleId: string, elapsed: number, flawless: bo
   }).catch(() => {
     /* non-blocking */
   });
-}
+};

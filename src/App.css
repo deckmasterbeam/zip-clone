@@ -323,6 +323,15 @@
   background: var(--blue-dark);
 }
 
+.tool-btn--random {
+  background: var(--green);
+  color: var(--white);
+}
+
+.tool-btn--random:hover {
+  background: #035c33;
+}
+
 .tool-btn--reset-designer {
   background: var(--red-light);
 }
