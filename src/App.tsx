@@ -6,6 +6,7 @@ import { PuzzleNavigator } from './PuzzleNavigator'
 import { GameGrid } from './GameGrid'
 import { Designer } from './Designer'
 import { DEV } from './env'
+import { getPlayerUUID } from './playerUUID'
 
 type AppMode = 'play' | 'designer'
 
@@ -79,7 +80,20 @@ function App() {
   useEffect(() => {
     if (isWon && gameState === 'playing') {
       setGameState('won')
-      setRecord(saveRecord(puzzle.id, elapsed, !hasRetractedRef.current))
+      const flawless = !hasRetractedRef.current
+      setRecord(saveRecord(puzzle.id, elapsed, flawless))
+      if (!DEV) {
+        fetch('/api/record-completion', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            puzzleId: puzzle.id,
+            timeSeconds: elapsed,
+            flawless,
+            playerUuid: getPlayerUUID(),
+          }),
+        }).catch(() => { /* non-blocking */ })
+      }
     }
   }, [isWon, gameState])
 
