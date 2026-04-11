@@ -1,0 +1,394 @@
+/* ── App layout ─────────────────────────────────────────── */
+.app {
+  display: flex;
+  justify-content: center;
+  padding: 24px;
+}
+
+/* ── Card ───────────────────────────────────────────────── */
+.card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08), 0 8px 32px rgba(0, 0, 0, 0.1);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.card-header {
+  text-align: center;
+}
+
+.game-title {
+  font-size: 2.25rem !important;
+  font-weight: 700 !important;
+  color: #0a66c2 !important;
+  margin: 0 0 8px !important;
+  letter-spacing: -0.5px !important;
+}
+
+.game-desc {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0;
+}
+
+/* ── Grid ───────────────────────────────────────────────── */
+.grid {
+  position: relative;
+  touch-action: none;
+  cursor: crosshair;
+}
+
+.grid--won {
+  cursor: default;
+}
+
+.path-svg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Cells ──────────────────────────────────────────────── */
+.cell {
+  position: absolute;
+  border-radius: 10px;
+  background: #eef2f7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.08s;
+  z-index: 2;
+}
+
+.cell--path {
+  background: #d5e6fb;
+}
+
+.cell--waypoint {
+  background: #0a66c2;
+}
+
+.cell--waypoint.cell--path {
+  background: #0a66c2;
+}
+
+.cell--won {
+  background: #d4edda !important;
+}
+
+.cell--waypoint-won {
+  background: #057642 !important;
+}
+
+.cell-label {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  position: relative;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* ── Walls ───────────────────────────────────────────────── */
+.wall {
+  position: absolute;
+  background: #1e1e2e;
+  border-radius: 3px;
+  z-index: 4;
+  pointer-events: none;
+}
+
+/* ── Level selector ─────────────────────────────────────── */
+.level-select {
+  width: 100%;
+  padding: 9px 14px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  font-weight: 600;
+  color: #333;
+  background: #eef2f7;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%230a66c2' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+  transition: border-color 0.15s;
+}
+
+.level-select:focus {
+  outline: none;
+  border-color: #0a66c2;
+}
+
+/* ── Timer ───────────────────────────────────────────────── */
+.timer {
+  font-size: 2rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  color: #0a66c2;
+  font-family: var(--mono, ui-monospace, monospace);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.timer-best {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: #999;
+  letter-spacing: 0.02em;
+}
+
+/* ── Grid wrapper + overlay ──────────────────────────────── */
+.grid-wrapper {
+  position: relative;
+}
+
+.grid-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.btn-start {
+  padding: 14px 44px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  background: #0a66c2;
+  color: #fff;
+  border: none;
+  border-radius: 32px;
+  cursor: pointer;
+  font-family: inherit;
+  box-shadow: 0 4px 18px rgba(10, 102, 194, 0.35);
+  transition: background 0.15s, transform 0.1s;
+}
+
+.btn-start:hover {
+  background: #004182;
+  transform: scale(1.04);
+}
+
+/* ── Footer ─────────────────────────────────────────────── */
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+}
+
+.status {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.status--won {
+  color: #057642;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.btn-reset {
+  padding: 8px 22px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  background: #0a66c2;
+  color: #fff;
+  border: none;
+  border-radius: 24px;
+  cursor: pointer;
+  transition: background 0.15s;
+  font-family: inherit;
+}
+
+.btn-reset:hover {
+  background: #004182;
+}
+
+.btn-designer {
+  padding: 8px 22px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  background: transparent;
+  color: #0a66c2;
+  border: 2px solid #0a66c2;
+  border-radius: 24px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  font-family: inherit;
+}
+
+.btn-designer:hover {
+  background: #0a66c2;
+  color: #fff;
+}
+
+.footer-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* ── Designer ────────────────────────────────────────────── */
+.designer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.designer-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  width: 100%;
+  align-items: center;
+}
+
+.designer-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.designer-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #aaa;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-right: 2px;
+}
+
+.tool-btn {
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: #eef2f7;
+  color: #444;
+  border: 2px solid transparent;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+  font-family: inherit;
+}
+
+.tool-btn:hover {
+  background: #d5e6fb;
+}
+
+.tool-btn--active {
+  background: #d5e6fb;
+  border-color: #0a66c2;
+  color: #0a66c2;
+}
+
+.tool-btn--copy {
+  background: #0a66c2;
+  color: #fff;
+}
+
+.tool-btn--copy:hover {
+  background: #004182;
+}
+
+.tool-btn--reset-designer {
+  background: #f8d7da;
+  color: #842029;
+  border-color: transparent;
+}
+
+.tool-btn--reset-designer:hover {
+  background: #f1aeb5;
+}
+
+.designer-name-input {
+  padding: 6px 10px;
+  font-size: 0.8rem;
+  font-family: inherit;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  outline: none;
+  width: 110px;
+  transition: border-color 0.15s;
+}
+
+.designer-name-input:focus {
+  border-color: #0a66c2;
+}
+
+.designer-hint {
+  font-size: 0.78rem;
+  color: #999;
+  text-align: center;
+  max-width: 380px;
+}
+
+.btn-back {
+  padding: 8px 22px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  background: transparent;
+  color: #666;
+  border: 2px solid #ddd;
+  border-radius: 24px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+  font-family: inherit;
+}
+
+.btn-back:hover {
+  border-color: #999;
+  color: #333;
+}
+
+/* ── Designer grid interactions ──────────────────────────── */
+.grid--designer .cell--clickable {
+  cursor: pointer;
+}
+
+.grid--designer .cell--clickable:hover {
+  background: #c6d9f5;
+}
+
+.grid--designer .cell--waypoint.cell--clickable:hover {
+  background: #084f99;
+}
+
+.wall-hit {
+  position: absolute;
+  z-index: 5;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background 0.1s;
+}
+
+.wall-hit:hover {
+  background: rgba(10, 102, 194, 0.22);
+}
+
+.wall-hit--active:hover {
+  background: rgba(220, 53, 69, 0.18);
+}
+

@@ -1,0 +1,185 @@
+import { useState, useEffect, useRef } from 'react'
+import './App.css'
+import { PUZZLES, type Cell } from './puzzles'
+import { checkWon, formatTime } from './gameLogic'
+import { PuzzleNavigator } from './PuzzleNavigator'
+import { GameGrid } from './GameGrid'
+import { Designer } from './Designer'
+import { DEV } from './env'
+
+type AppMode = 'play' | 'designer'
+
+type GameState = 'idle' | 'playing' | 'won'
+
+function useTimer(running: boolean) {
+  const [elapsed, setElapsed] = useState(0)
+  const startRef = useRef<number | null>(null)
+  const rafRef = useRef<number | null>(null)
+
+  useEffect(() => {
+    if (running) {
+      startRef.current = performance.now() - elapsed * 1000
+      const tick = () => {
+        setElapsed((performance.now() - startRef.current!) / 1000)
+        rafRef.current = requestAnimationFrame(tick)
+      }
+      rafRef.current = requestAnimationFrame(tick)
+    } else {
+      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current)
+    }
+    return () => { if (rafRef.current !== null) cancelAnimationFrame(rafRef.current) }
+  }, [running])
+
+  const reset = () => {
+    if (rafRef.current !== null) cancelAnimationFrame(rafRef.current)
+    startRef.current = null
+    setElapsed(0)
+  }
+
+  return { elapsed, reset }
+}
+
+type PuzzleRecord = { bestTime: number; flawless: boolean; }
+
+function loadRecord(puzzleId: string): PuzzleRecord | null {
+  try {
+    const raw = localStorage.getItem(`zip-record:${puzzleId}`)
+    return raw ? (JSON.parse(raw) as PuzzleRecord) : null
+  } catch {
+    return null
+  }
+}
+
+function saveRecord(puzzleId: string, time: number, flawless: boolean): PuzzleRecord {
+  const prev = loadRecord(puzzleId)
+  const record: PuzzleRecord = {
+    bestTime: prev ? Math.min(prev.bestTime, time) : time,
+    flawless,
+  }
+  localStorage.setItem(`zip-record:${puzzleId}`, JSON.stringify(record))
+  return record
+}
+
+function App() {
+  const [appMode, setAppMode] = useState<AppMode>('play')
+  const [gameState, setGameState] = useState<GameState>('idle')
+  const [levelIndex, setLevelIndex] = useState(0)
+  const [path, setPath] = useState<Cell[]>([])
+  const [isDragging, setIsDragging] = useState(false)
+  const [record, setRecord] = useState<PuzzleRecord | null>(() => loadRecord(PUZZLES[0].id))
+  const hasRetractedRef = useRef(false)
+
+  const puzzle = PUZZLES[levelIndex]
+  const { gridSize, waypoints } = puzzle
+  const totalCells = gridSize * gridSize
+  const isWon = checkWon(path, totalCells, waypoints[waypoints.length - 1])
+
+  const { elapsed, reset: resetTimer } = useTimer(gameState === 'playing')
+
+  useEffect(() => {
+    if (isWon && gameState === 'playing') {
+      setGameState('won')
+      setRecord(saveRecord(puzzle.id, elapsed, !hasRetractedRef.current))
+    }
+  }, [isWon, gameState])
+
+  const startGame = () => {
+    setPath([])
+    setIsDragging(false)
+    resetTimer()
+    hasRetractedRef.current = false
+    setGameState('playing')
+  }
+
+  const selectLevel = (i: number) => {
+    setLevelIndex(i)
+    setPath([])
+    setIsDragging(false)
+    resetTimer()
+    setGameState('idle')
+    setRecord(loadRecord(PUZZLES[i].id))
+  }
+
+  const reset = () => {
+    setPath([])
+    setIsDragging(false)
+    resetTimer()
+    hasRetractedRef.current = false
+    setGameState('idle')
+  }
+
+  return (
+    <div className="app">
+      <div className="card">
+        <div className="card-header">
+          <h1 className="game-title">Zip</h1>
+          <p className="game-desc">
+            Visit every number in order and cover every cell
+          </p>
+        </div>
+
+        {appMode === 'play' ? (
+          <>
+            <PuzzleNavigator
+              puzzles={PUZZLES}
+              activeIndex={levelIndex}
+              onSelect={selectLevel}
+            />
+
+            <div className="timer" aria-live="polite">
+              {formatTime(elapsed)}
+              {record && (
+                <span className="timer-best">
+                  Best {formatTime(record.bestTime)}
+                  {record.flawless && ` · ✦ Flawless`}
+                </span>
+              )}
+            </div>
+
+            <div className="grid-wrapper">
+              <GameGrid
+                puzzle={puzzle}
+                path={path}
+                isWon={isWon}
+                isDragging={isDragging}
+                revealed={gameState !== 'idle'}
+                onPathChange={newPath => {
+                  if (newPath.length < path.length) hasRetractedRef.current = true
+                  setPath(newPath)
+                }}
+                onDragChange={setIsDragging}
+              />
+              {gameState === 'idle' && (
+                <div className="grid-overlay">
+                  <button className="btn-start" onClick={startGame}>Start</button>
+                </div>
+              )}
+            </div>
+
+            <div className="card-footer">
+              {isWon ? (
+                <p className="status status--won">
+                  Solved!{record?.flawless ? ' ✦ Flawless' : ''}
+                </p>
+              ) : (
+                <p className="status">{gameState === 'idle' ? '\u00a0' : `${path.length} / ${totalCells} cells`}</p>
+              )}
+              <div className="footer-actions">
+                <button className="btn-reset" onClick={reset}>Reset</button>
+                {DEV && (
+                  <button className="btn-designer" onClick={() => setAppMode('designer')}>
+                    Designer
+                  </button>
+                )}
+              </div>
+            </div>
+          </>
+        ) : DEV ? (
+          <Designer onClose={() => setAppMode('play')} />
+        ) : null}
+      </div>
+    </div>
+  )
+}
+
+export default App
