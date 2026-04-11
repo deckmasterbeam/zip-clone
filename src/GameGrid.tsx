@@ -63,7 +63,7 @@ export function GameGrid({ puzzle, path, isWon, revealed, onPathChange, onDragCh
           <polyline
             points={svgPoints}
             fill="none"
-            stroke={isWon ? '#057642' : '#0a66c2'}
+            stroke={isWon ? 'var(--green)' : 'var(--blue-darkest)'}
             strokeWidth={CELL_SIZE * 0.55}
             strokeLinecap="round"
             strokeLinejoin="round"

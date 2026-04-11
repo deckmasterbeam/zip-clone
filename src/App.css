@@ -7,7 +7,7 @@
 
 /* ── Card ───────────────────────────────────────────────── */
 .card {
-  background: #fff;
+  background: var(--white);
   border-radius: 16px;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08), 0 8px 32px rgba(0, 0, 0, 0.1);
   padding: 32px;
@@ -26,14 +26,14 @@
 .game-title {
   font-size: 2.25rem !important;
   font-weight: 700 !important;
-  color: #0a66c2 !important;
+  color: var(--blue) !important;
   margin: 0 0 8px !important;
   letter-spacing: -0.5px !important;
 }
 
 .game-desc {
   font-size: 0.9rem;
-  color: #666;
+  color: var(--ink-muted);
   margin: 0;
 }
 
@@ -59,7 +59,7 @@
 .cell {
   position: absolute;
   border-radius: 10px;
-  background: #eef2f7;
+  background: var(--surface);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -68,29 +68,29 @@
 }
 
 .cell--path {
-  background: #d5e6fb;
+  background: var(--blue-mid);
 }
 
 .cell--waypoint {
-  background: #0a66c2;
+  background: var(--blue);
 }
 
 .cell--waypoint.cell--path {
-  background: #0a66c2;
+  background: var(--blue);
 }
 
 .cell--won {
-  background: #d4edda !important;
+  background: var(--green-light) !important;
 }
 
 .cell--waypoint-won {
-  background: #057642 !important;
+  background: var(--green) !important;
 }
 
 .cell-label {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--white);
   position: relative;
   z-index: 3;
   pointer-events: none;
@@ -99,7 +99,7 @@
 /* ── Walls ───────────────────────────────────────────────── */
 .wall {
   position: absolute;
-  background: #1e1e2e;
+  background: var(--dark-surface);
   border-radius: 3px;
   z-index: 4;
   pointer-events: none;
@@ -112,14 +112,13 @@
   font-size: 0.9rem;
   font-family: inherit;
   font-weight: 600;
-  color: #333;
-  background: #eef2f7;
+  color: var(--ink-dark);
+  background: var(--surface);
   border: 2px solid transparent;
   border-radius: 10px;
   cursor: pointer;
   appearance: none;
   -webkit-appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%230a66c2' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 14px center;
   padding-right: 36px;
@@ -128,7 +127,7 @@
 
 .level-select:focus {
   outline: none;
-  border-color: #0a66c2;
+  border-color: var(--blue);
 }
 
 /* ── Timer ───────────────────────────────────────────────── */
@@ -137,7 +136,7 @@
   font-weight: 700;
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.04em;
-  color: #0a66c2;
+  color: var(--blue);
   font-family: var(--mono, ui-monospace, monospace);
   display: flex;
   flex-direction: column;
@@ -148,7 +147,7 @@
 .timer-best {
   font-size: 0.72rem;
   font-weight: 500;
-  color: #999;
+  color: var(--ink-faint);
   letter-spacing: 0.02em;
 }
 
@@ -171,18 +170,18 @@
   padding: 14px 44px;
   font-size: 1.1rem;
   font-weight: 700;
-  background: #0a66c2;
-  color: #fff;
+  background: var(--blue);
+  color: var(--white);
   border: none;
   border-radius: 32px;
   cursor: pointer;
   font-family: inherit;
-  box-shadow: 0 4px 18px rgba(10, 102, 194, 0.35);
+  box-shadow: 0 4px 18px rgba(var(--blue-rgb), 0.35);
   transition: background 0.15s, transform 0.1s;
 }
 
 .btn-start:hover {
-  background: #004182;
+  background: var(--blue-dark);
   transform: scale(1.04);
 }
 
@@ -198,12 +197,12 @@
 .status {
   margin: 0;
   font-size: 0.9rem;
-  color: #666;
+  color: var(--ink-muted);
   font-weight: 500;
 }
 
 .status--won {
-  color: #057642;
+  color: var(--green);
   font-weight: 700;
   font-size: 1rem;
 }
@@ -212,8 +211,8 @@
   padding: 8px 22px;
   font-size: 0.875rem;
   font-weight: 600;
-  background: #0a66c2;
-  color: #fff;
+  background: var(--blue);
+  color: var(--white);
   border: none;
   border-radius: 24px;
   cursor: pointer;
@@ -222,7 +221,7 @@
 }
 
 .btn-reset:hover {
-  background: #004182;
+  background: var(--blue-dark);
 }
 
 .btn-designer {
@@ -230,8 +229,8 @@
   font-size: 0.875rem;
   font-weight: 600;
   background: transparent;
-  color: #0a66c2;
-  border: 2px solid #0a66c2;
+  color: var(--blue);
+  border: 2px solid var(--blue);
   border-radius: 24px;
   cursor: pointer;
   transition: background 0.15s, color 0.15s;
@@ -239,8 +238,8 @@
 }
 
 .btn-designer:hover {
-  background: #0a66c2;
-  color: #fff;
+  background: var(--blue);
+  color: var(--white);
 }
 
 .footer-actions {
@@ -275,7 +274,7 @@
 .designer-label {
   font-size: 0.7rem;
   font-weight: 700;
-  color: #aaa;
+  color: var(--ink-placeholder);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-right: 2px;
@@ -285,8 +284,8 @@
   padding: 6px 14px;
   font-size: 0.8rem;
   font-weight: 600;
-  background: #eef2f7;
-  color: #444;
+  background: var(--surface);
+  color: var(--ink-mid);
   border: 2px solid transparent;
   border-radius: 20px;
   cursor: pointer;
@@ -295,39 +294,39 @@
 }
 
 .tool-btn:hover {
-  background: #d5e6fb;
+  background: var(--blue-light);
 }
 
 .tool-btn--active {
-  background: #d5e6fb;
-  border-color: #0a66c2;
-  color: #0a66c2;
+  background: var(--blue-light);
+  border-color: var(--blue);
+  color: var(--blue);
 }
 
 .tool-btn--copy {
-  background: #0a66c2;
-  color: #fff;
+  background: var(--blue);
+  color: var(--white);
 }
 
 .tool-btn--copy:hover {
-  background: #004182;
+  background: var(--blue-dark);
 }
 
 .tool-btn--reset-designer {
-  background: #f8d7da;
-  color: #842029;
+  background: var(--red-light);
+  color: var(--red-dark);
   border-color: transparent;
 }
 
 .tool-btn--reset-designer:hover {
-  background: #f1aeb5;
+  background: var(--red-mid);
 }
 
 .designer-name-input {
   padding: 6px 10px;
   font-size: 0.8rem;
   font-family: inherit;
-  border: 2px solid #e0e0e0;
+  border: 2px solid var(--stroke);
   border-radius: 8px;
   outline: none;
   width: 110px;
@@ -335,12 +334,12 @@
 }
 
 .designer-name-input:focus {
-  border-color: #0a66c2;
+  border-color: var(--blue);
 }
 
 .designer-hint {
   font-size: 0.78rem;
-  color: #999;
+  color: var(--ink-faint);
   text-align: center;
   max-width: 380px;
 }
@@ -350,8 +349,8 @@
   font-size: 0.875rem;
   font-weight: 600;
   background: transparent;
-  color: #666;
-  border: 2px solid #ddd;
+  color: var(--ink-muted);
+  border: 2px solid var(--stroke-light);
   border-radius: 24px;
   cursor: pointer;
   transition: border-color 0.15s, color 0.15s;
@@ -359,8 +358,8 @@
 }
 
 .btn-back:hover {
-  border-color: #999;
-  color: #333;
+  border-color: var(--ink-faint);
+  color: var(--ink-dark);
 }
 
 /* ── Designer grid interactions ──────────────────────────── */
@@ -369,11 +368,11 @@
 }
 
 .grid--designer .cell--clickable:hover {
-  background: #c6d9f5;
+  background: var(--blue-lighter);
 }
 
 .grid--designer .cell--waypoint.cell--clickable:hover {
-  background: #084f99;
+  background: var(--blue-deep);
 }
 
 .wall-hit {
@@ -385,10 +384,10 @@
 }
 
 .wall-hit:hover {
-  background: rgba(10, 102, 194, 0.22);
+  background: rgba(var(--blue-rgb), 0.22);
 }
 
 .wall-hit--active:hover {
-  background: rgba(220, 53, 69, 0.18);
+  background: rgba(var(--red-rgb), 0.18);
 }
 
