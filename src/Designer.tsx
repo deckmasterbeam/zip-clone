@@ -10,7 +10,7 @@ function toPuzzleTs(
 ): string {
   const id = crypto.randomUUID();
   const waypointsStr = waypoints
-    .map((w, i) => `    { row: ${w.row}, col: ${w.col} },`)
+    .map((w) => `    { row: ${w.row}, col: ${w.col} },`)
     .join("\n");
 
   const wallsStr =
