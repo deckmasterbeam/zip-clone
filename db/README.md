@@ -34,11 +34,11 @@ npx vercel dev
 
 ## Schema reference
 
-| Column | Type | Description |
-|---|---|---|
-| `id` | `BIGSERIAL` | Auto-incrementing primary key |
-| `puzzle_id` | `TEXT` | UUID of the puzzle from `puzzles.ts` |
-| `player_uuid` | `UUID` | Anonymous player ID stored in `localStorage` |
-| `time_seconds` | `FLOAT` | Completion time in seconds |
-| `flawless` | `BOOLEAN` | `true` if the path was never retracted |
-| `completed_at` | `TIMESTAMPTZ` | Server-side timestamp, defaults to `NOW()` |
+| Column         | Type          | Description                                  |
+| -------------- | ------------- | -------------------------------------------- |
+| `id`           | `BIGSERIAL`   | Auto-incrementing primary key                |
+| `puzzle_id`    | `TEXT`        | UUID of the puzzle from `puzzles.ts`         |
+| `player_uuid`  | `UUID`        | Anonymous player ID stored in `localStorage` |
+| `time_seconds` | `FLOAT`       | Completion time in seconds                   |
+| `flawless`     | `BOOLEAN`     | `true` if the path was never retracted       |
+| `completed_at` | `TIMESTAMPTZ` | Server-side timestamp, defaults to `NOW()`   |

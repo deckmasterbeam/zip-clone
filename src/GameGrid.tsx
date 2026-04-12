@@ -1,4 +1,4 @@
-import type { Cell, Puzzle } from "./puzzles";
+import type { Cell, Puzzle } from './puzzles';
 import {
   CELL_SIZE,
   GAP,
@@ -10,7 +10,7 @@ import {
   buildWaypointMap,
   extendPath,
   pathToSvgPoints,
-} from "./gameLogic";
+} from './gameLogic';
 
 export const GameGrid = ({
   puzzle,
@@ -82,7 +82,7 @@ export const GameGrid = ({
 
   return (
     <div
-      className={`grid${isWon ? " grid--won" : ""}`}
+      className={`grid${isWon ? ' grid--won' : ''}`}
       style={{ width: px, height: px }}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
@@ -94,7 +94,7 @@ export const GameGrid = ({
           <polyline
             points={svgPoints}
             fill="none"
-            stroke={isWon ? "var(--green)" : "var(--blue-darkest)"}
+            stroke={isWon ? 'var(--green)' : 'var(--blue-darkest)'}
             strokeWidth={CELL_SIZE * 0.55}
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -115,10 +115,7 @@ export const GameGrid = ({
                 className="wall"
                 style={{
                   left: left.col * (CELL_SIZE + GAP),
-                  top:
-                    (top.row + 1) * (CELL_SIZE + GAP) -
-                    GAP / 2 -
-                    WALL_THICKNESS / 2,
+                  top: (top.row + 1) * (CELL_SIZE + GAP) - GAP / 2 - WALL_THICKNESS / 2,
                   width: CELL_SIZE,
                   height: WALL_THICKNESS,
                 }}
@@ -130,10 +127,7 @@ export const GameGrid = ({
                 key={i}
                 className="wall"
                 style={{
-                  left:
-                    (left.col + 1) * (CELL_SIZE + GAP) -
-                    GAP / 2 -
-                    WALL_THICKNESS / 2,
+                  left: (left.col + 1) * (CELL_SIZE + GAP) - GAP / 2 - WALL_THICKNESS / 2,
                   top: top.row * (CELL_SIZE + GAP),
                   width: WALL_THICKNESS,
                   height: CELL_SIZE,
@@ -151,14 +145,14 @@ export const GameGrid = ({
           const isWaypoint = waypointLabel !== undefined;
           const inPath = pathSet.has(key);
           const classes = [
-            "cell",
-            inPath && "cell--path",
-            revealed && isWaypoint && "cell--waypoint",
-            isWon && inPath && "cell--won",
-            revealed && isWon && isWaypoint && "cell--waypoint-won",
+            'cell',
+            inPath && 'cell--path',
+            revealed && isWaypoint && 'cell--waypoint',
+            isWon && inPath && 'cell--won',
+            revealed && isWon && isWaypoint && 'cell--waypoint-won',
           ]
             .filter(Boolean)
-            .join(" ");
+            .join(' ');
           return (
             <div
               key={key}
@@ -170,13 +164,11 @@ export const GameGrid = ({
                 height: CELL_SIZE,
               }}
             >
-              {revealed && isWaypoint && (
-                <span className="cell-label">{waypointLabel}</span>
-              )}
+              {revealed && isWaypoint && <span className="cell-label">{waypointLabel}</span>}
             </div>
           );
         })
       )}
     </div>
   );
-}
+};

@@ -1,27 +1,19 @@
-import { useState } from "react";
-import type { Cell, Wall } from "./puzzles";
-import { DesignerGrid, type DesignerMode } from "./DesignerGrid";
+import { useState } from 'react';
+import type { Cell, Wall } from './puzzles';
+import { DesignerGrid, type DesignerMode } from './DesignerGrid';
 
-const toPuzzleTs = (
-  name: string,
-  gridSize: number,
-  waypoints: Cell[],
-  walls: Wall[]
-): string => {
+const toPuzzleTs = (name: string, gridSize: number, waypoints: Cell[], walls: Wall[]): string => {
   const id = crypto.randomUUID();
-  const waypointsStr = waypoints
-    .map((w) => `    { row: ${w.row}, col: ${w.col} },`)
-    .join("\n");
+  const waypointsStr = waypoints.map((w) => `    { row: ${w.row}, col: ${w.col} },`).join('\n');
 
   const wallsStr =
     walls.length === 0
-      ? ""
+      ? ''
       : `\n  walls: [\n${walls
           .map(
-            ([a, b]) =>
-              `    [{ row: ${a.row}, col: ${a.col} }, { row: ${b.row}, col: ${b.col} }],`
+            ([a, b]) => `    [{ row: ${a.row}, col: ${a.col} }, { row: ${b.row}, col: ${b.col} }],`
           )
-          .join("\n")}\n  ],`;
+          .join('\n')}\n  ],`;
 
   return `{
   id: '${id}',
@@ -31,30 +23,24 @@ const toPuzzleTs = (
 ${waypointsStr}
   ],${wallsStr}
 }`;
-}
+};
 
 const MAX_SIZE = 10;
 const MIN_SIZE = 2;
 
-export const Designer =({ 
-  onClose
-}: {
-  onClose: () => void;
-}) => {
+export const Designer = ({ onClose }: { onClose: () => void }) => {
   const [gridSize, setGridSize] = useState(4);
   const [waypoints, setWaypoints] = useState<Cell[]>([]);
   const [walls, setWalls] = useState<Wall[]>([]);
-  const [mode, setMode] = useState<DesignerMode>("waypoints");
-  const [name, setName] = useState("Custom");
+  const [mode, setMode] = useState<DesignerMode>('waypoints');
+  const [name, setName] = useState('Custom');
   const [copied, setCopied] = useState(false);
 
   const handleGridSizeChange = (size: number) => {
     setGridSize(size);
     setWaypoints((prev) => prev.filter((w) => w.row < size && w.col < size));
     setWalls((prev) =>
-      prev.filter(
-        ([a, b]) => a.row < size && a.col < size && b.row < size && b.col < size
-      )
+      prev.filter(([a, b]) => a.row < size && a.col < size && b.row < size && b.col < size)
     );
   };
 
@@ -67,8 +53,8 @@ export const Designer =({
 
   const hints: Record<DesignerMode, string> = {
     waypoints:
-      "Click cells to place waypoints in order. Click an existing waypoint to remove it and all after it.",
-    walls: "Click the gap between two cells to place or remove a wall.",
+      'Click cells to place waypoints in order. Click an existing waypoint to remove it and all after it.',
+    walls: 'Click the gap between two cells to place or remove a wall.',
   };
 
   return (
@@ -100,14 +86,14 @@ export const Designer =({
         <div className="designer-group">
           <span className="designer-label">Mode</span>
           <button
-            className={`tool-btn${mode === "waypoints" ? " tool-btn--active" : ""}`}
-            onClick={() => setMode("waypoints")}
+            className={`tool-btn${mode === 'waypoints' ? ' tool-btn--active' : ''}`}
+            onClick={() => setMode('waypoints')}
           >
             Waypoints
           </button>
           <button
-            className={`tool-btn${mode === "walls" ? " tool-btn--active" : ""}`}
-            onClick={() => setMode("walls")}
+            className={`tool-btn${mode === 'walls' ? ' tool-btn--active' : ''}`}
+            onClick={() => setMode('walls')}
           >
             Walls
           </button>
@@ -122,7 +108,7 @@ export const Designer =({
             aria-label="Puzzle name"
           />
           <button className="tool-btn tool-btn--copy" onClick={copyToClipboard}>
-            {copied ? "✓ Copied!" : "Copy puzzle"}
+            {copied ? '✓ Copied!' : 'Copy puzzle'}
           </button>
           <button
             className="tool-btn tool-btn--reset-designer"
@@ -152,4 +138,4 @@ export const Designer =({
       </button>
     </div>
   );
-}
+};

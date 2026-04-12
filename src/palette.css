@@ -1,37 +1,37 @@
 /* ── Zip Player Color Tokens ────────────────────────────── */
 :root {
   /* Blues */
-  --blue:            #0a66c2;
-  --blue-darkest:    #001e3f;
-  --blue-dark:       #004182;
-  --blue-deep:       #084f99;
-  --blue-mid:        #609be2;
-  --blue-light:      #d5e6fb;
-  --blue-lighter:    #c6d9f5;
-  --blue-rgb:        10, 102, 194; /* for rgba() usage */
+  --blue: #0a66c2;
+  --blue-darkest: #001e3f;
+  --blue-dark: #004182;
+  --blue-deep: #084f99;
+  --blue-mid: #609be2;
+  --blue-light: #d5e6fb;
+  --blue-lighter: #c6d9f5;
+  --blue-rgb: 10, 102, 194; /* for rgba() usage */
 
   /* Greens */
-  --green:           #057642;
-  --green-light:     #d4edda;
+  --green: #057642;
+  --green-light: #d4edda;
 
   /* Reds */
-  --red-light:       #fc6e7a;
-  --red-mid:         #993f48;
-  --red-rgb:         220, 53, 69; /* for rgba() usage */
+  --red-light: #fc6e7a;
+  --red-mid: #993f48;
+  --red-rgb: 220, 53, 69; /* for rgba() usage */
 
   /* Surfaces */
-  --white:           #fff;
-  --surface:         #eef2f7;
-  --dark-surface:    #1e1e2e;
+  --white: #fff;
+  --surface: #eef2f7;
+  --dark-surface: #1e1e2e;
 
   /* Ink (text & icons) */
-  --ink-dark:        #333;
-  --ink-mid:         #444;
-  --ink-muted:       #666;
-  --ink-faint:       #999;
+  --ink-dark: #333;
+  --ink-mid: #444;
+  --ink-muted: #666;
+  --ink-faint: #999;
   --ink-placeholder: #aaa;
 
   /* Strokes (borders) */
-  --stroke:          #e0e0e0;
-  --stroke-light:    #ddd;
+  --stroke: #e0e0e0;
+  --stroke-light: #ddd;
 }
