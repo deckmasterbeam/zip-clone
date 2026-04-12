@@ -1,4 +1,4 @@
-const KEY = "zip-player-uuid";
+const KEY = 'zip-player-uuid';
 
 export const getPlayerUUID = (): string => {
   let uuid = localStorage.getItem(KEY);
@@ -7,4 +7,4 @@ export const getPlayerUUID = (): string => {
     localStorage.setItem(KEY, uuid);
   }
   return uuid;
-}
+};

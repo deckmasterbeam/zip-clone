@@ -9,7 +9,9 @@
 .card {
   background: var(--white);
   border-radius: 16px;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08), 0 8px 32px rgba(0, 0, 0, 0.1);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.08),
+    0 8px 32px rgba(0, 0, 0, 0.1);
   padding: 32px;
   display: flex;
   flex-direction: column;
@@ -40,8 +42,13 @@
 }
 
 @media (max-width: 480px) {
-  .app { padding: 8px; }
-  .card { padding: 16px; gap: 16px; }
+  .app {
+    padding: 8px;
+  }
+  .card {
+    padding: 16px;
+    gap: 16px;
+  }
 }
 
 /* ── Grid ───────────────────────────────────────────────── */
@@ -188,7 +195,9 @@
   cursor: pointer;
   font-family: inherit;
   box-shadow: 0 4px 18px rgba(var(--blue-rgb), 0.35);
-  transition: background 0.15s, transform 0.1s;
+  transition:
+    background 0.15s,
+    transform 0.1s;
 }
 
 .btn-start:hover {
@@ -244,7 +253,9 @@
   border: 2px solid var(--blue);
   border-radius: 24px;
   cursor: pointer;
-  transition: background 0.15s, color 0.15s;
+  transition:
+    background 0.15s,
+    color 0.15s;
   font-family: inherit;
 }
 
@@ -300,7 +311,9 @@
   border: 2px solid transparent;
   border-radius: 20px;
   cursor: pointer;
-  transition: background 0.12s, border-color 0.12s;
+  transition:
+    background 0.12s,
+    border-color 0.12s;
   font-family: inherit;
 }
 
@@ -362,7 +375,9 @@
   border: 2px solid var(--stroke-light);
   border-radius: 24px;
   cursor: pointer;
-  transition: border-color 0.15s, color 0.15s;
+  transition:
+    border-color 0.15s,
+    color 0.15s;
   font-family: inherit;
 }
 
@@ -399,4 +414,3 @@
 .wall-hit--active:hover {
   background: rgba(var(--red-rgb), 0.18);
 }
-
