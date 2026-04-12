@@ -4,25 +4,26 @@ import { DesignerGrid, type DesignerMode } from './DesignerGrid';
 
 const toPuzzleTs = (name: string, gridSize: number, waypoints: Cell[], walls: Wall[]): string => {
   const id = crypto.randomUUID();
-  const waypointsStr = waypoints.map((w) => `    { row: ${w.row}, col: ${w.col} },`).join('\n');
+  const waypointsStr = waypoints.map((w) => `      { row: ${w.row}, col: ${w.col} },`).join('\n');
 
   const wallsStr =
     walls.length === 0
       ? ''
-      : `\n  walls: [\n${walls
+      : `\n    walls: [\n${walls
           .map(
-            ([a, b]) => `    [{ row: ${a.row}, col: ${a.col} }, { row: ${b.row}, col: ${b.col} }],`
+            ([a, b]) =>
+              `      [{ row: ${a.row}, col: ${a.col} }, { row: ${b.row}, col: ${b.col} }],`
           )
-          .join('\n')}\n  ],`;
+          .join('\n')}\n    ],`;
 
   return `{
-  id: '${id}',
-  name: '${name}',
-  gridSize: ${gridSize},
-  waypoints: [
+    id: '${id}',
+    name: '${name}',
+    gridSize: ${gridSize},
+    waypoints: [
 ${waypointsStr}
-  ],${wallsStr}
-}`;
+    ],${wallsStr}
+  },`;
 };
 
 const MAX_SIZE = 10;
