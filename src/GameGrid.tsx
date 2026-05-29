@@ -105,17 +105,17 @@ export const GameGrid = ({
 
       {revealed &&
         (puzzle.walls ?? []).map(([a, b], i) => {
-          const horizontal = a.row !== b.row;
-          const top = a.row <= b.row ? a : b;
-          const left = a.col <= b.col ? a : b;
+          const horizontal = a.r !== b.r;
+          const top = a.r <= b.r ? a : b;
+          const left = a.c <= b.c ? a : b;
           if (horizontal) {
             return (
               <div
                 key={i}
                 className="wall"
                 style={{
-                  left: left.col * (CELL_SIZE + GAP),
-                  top: (top.row + 1) * (CELL_SIZE + GAP) - GAP / 2 - WALL_THICKNESS / 2,
+                  left: left.c * (CELL_SIZE + GAP),
+                  top: (top.r + 1) * (CELL_SIZE + GAP) - GAP / 2 - WALL_THICKNESS / 2,
                   width: CELL_SIZE,
                   height: WALL_THICKNESS,
                 }}
@@ -127,8 +127,8 @@ export const GameGrid = ({
                 key={i}
                 className="wall"
                 style={{
-                  left: (left.col + 1) * (CELL_SIZE + GAP) - GAP / 2 - WALL_THICKNESS / 2,
-                  top: top.row * (CELL_SIZE + GAP),
+                  left: (left.c + 1) * (CELL_SIZE + GAP) - GAP / 2 - WALL_THICKNESS / 2,
+                  top: top.r * (CELL_SIZE + GAP),
                   width: WALL_THICKNESS,
                   height: CELL_SIZE,
                 }}
@@ -139,7 +139,7 @@ export const GameGrid = ({
 
       {Array.from({ length: gridSize }, (_, row) =>
         Array.from({ length: gridSize }, (_, col) => {
-          const cell = { row, col };
+          const cell = { r: row, c: col };
           const key = cellKey(cell);
           const waypointLabel = waypointMap.get(key);
           const isWaypoint = waypointLabel !== undefined;

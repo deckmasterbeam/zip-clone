@@ -12,11 +12,17 @@ When runnning locally, a designer mode is avalible so that I can design/recreate
 
 - [ ] Make a leaderboard
 
-- [ ] Get all Zips into the puzzle list. All the zips since Febuary are stored here: https://daily-logic-puzzles.vercel.app/linkedin-games/zip-fe-today
-    - [ ] 25?
-    - [ ] January 26
-    - [ ] Febuary 26
-    - [X] March 26
-    - [In progress] April 26
+- [ ] Get all Zips into the puzzle list. All the zips since Febuary are stored here: 
+  - (this list is incomplete, I think they only expose the last N most recent puzzles?) https://daily-logic-puzzles.vercel.app/linkedin-games/zip-fe-today
+  - (much better, fuller history) https://www.youtube.com/playlist?list=PLLE2dY85AtnfQA-RHK7qynggMLKDMHHJ3
+  - [ ] 2025
+  - [ ] January 2026
+  - [ ] Febuary 2026
+  - [x] March 2026
+  - [In progress] April 2026
 
 - [ ] Rendering wall corners
+
+- [ ] Random mode
+
+- [ ] Challenge mode to see if you can solve all the unique solutions, for the subset of puzzles that have multiple solutions

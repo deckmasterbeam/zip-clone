@@ -61,7 +61,7 @@ export const DesignerGrid = ({
       {/* Cells */}
       {Array.from({ length: gridSize }, (_, row) =>
         Array.from({ length: gridSize }, (_, col) => {
-          const cell = { row, col };
+          const cell = { r: row, c: col };
           const key = cellKey(cell);
           const waypointLabel = waypointMap.get(key);
           const isWaypoint = waypointLabel !== undefined;
@@ -92,17 +92,17 @@ export const DesignerGrid = ({
 
       {/* Placed walls */}
       {walls.map(([a, b], i) => {
-        const horizontal = a.row !== b.row;
-        const top = a.row <= b.row ? a : b;
-        const left = a.col <= b.col ? a : b;
+        const horizontal = a.r !== b.r;
+        const top = a.r <= b.r ? a : b;
+        const left = a.c <= b.c ? a : b;
         if (horizontal) {
           return (
             <div
               key={i}
               className="wall"
               style={{
-                left: left.col * (CELL_SIZE + GAP),
-                top: (top.row + 1) * (CELL_SIZE + GAP) - GAP / 2 - WALL_THICKNESS / 2,
+                left: left.c * (CELL_SIZE + GAP),
+                top: (top.r + 1) * (CELL_SIZE + GAP) - GAP / 2 - WALL_THICKNESS / 2,
                 width: CELL_SIZE,
                 height: WALL_THICKNESS,
               }}
@@ -114,8 +114,8 @@ export const DesignerGrid = ({
               key={i}
               className="wall"
               style={{
-                left: (left.col + 1) * (CELL_SIZE + GAP) - GAP / 2 - WALL_THICKNESS / 2,
-                top: top.row * (CELL_SIZE + GAP),
+                left: (left.c + 1) * (CELL_SIZE + GAP) - GAP / 2 - WALL_THICKNESS / 2,
+                top: top.r * (CELL_SIZE + GAP),
                 width: WALL_THICKNESS,
                 height: CELL_SIZE,
               }}
@@ -128,8 +128,8 @@ export const DesignerGrid = ({
       {mode === 'walls' &&
         Array.from({ length: gridSize }, (_, row) =>
           Array.from({ length: gridSize - 1 }, (_, col) => {
-            const a = { row, col };
-            const b = { row, col: col + 1 };
+            const a = { r: row, c: col };
+            const b = { r: row, c: col + 1 };
             const active = wallSet.has(wallKey(a, b));
             return (
               <div
@@ -150,8 +150,8 @@ export const DesignerGrid = ({
       {mode === 'walls' &&
         Array.from({ length: gridSize - 1 }, (_, row) =>
           Array.from({ length: gridSize }, (_, col) => {
-            const a = { row, col };
-            const b = { row: row + 1, col };
+            const a = { r: row, c: col };
+            const b = { r: row + 1, c: col };
             const active = wallSet.has(wallKey(a, b));
             return (
               <div
