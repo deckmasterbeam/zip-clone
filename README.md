@@ -13,3 +13,10 @@ When runnning locally, a designer mode is avalible so that I can design/recreate
 - [ ] Make a leaderboard
 
 - [ ] Get all Zips into the puzzle list. All the zips since Febuary are stored here: https://daily-logic-puzzles.vercel.app/linkedin-games/zip-fe-today
+    - [ ] 25?
+    - [ ] January 26
+    - [ ] Febuary 26
+    - [X] March 26
+    - [In progress] April 26
+
+- [ ] Rendering wall corners
