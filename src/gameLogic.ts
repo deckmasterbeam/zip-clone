@@ -4,21 +4,20 @@ export const CELL_SIZE = 80;
 export const GAP = 8;
 export const WALL_THICKNESS = 5;
 
-export const cellKey = (c: Cell) => `${c.row},${c.col}`;
+export const cellKey = (c: Cell) => `${c.r},${c.c}`;
 
 // Normalized wall key — order-independent
 export const wallKey = (a: Cell, b: Cell) => {
-  const ak = a.row * 100 + a.col;
-  const bk = b.row * 100 + b.col;
+  const ak = a.r * 100 + a.c;
+  const bk = b.r * 100 + b.c;
   return ak < bk ? `${cellKey(a)}|${cellKey(b)}` : `${cellKey(b)}|${cellKey(a)}`;
 };
 
-export const isAdjacent = (a: Cell, b: Cell) =>
-  Math.abs(a.row - b.row) + Math.abs(a.col - b.col) === 1;
+export const isAdjacent = (a: Cell, b: Cell) => Math.abs(a.r - b.r) + Math.abs(a.c - b.c) === 1;
 
 export const cellCenter = (c: Cell) => ({
-  x: c.col * (CELL_SIZE + GAP) + CELL_SIZE / 2,
-  y: c.row * (CELL_SIZE + GAP) + CELL_SIZE / 2,
+  x: c.c * (CELL_SIZE + GAP) + CELL_SIZE / 2,
+  y: c.r * (CELL_SIZE + GAP) + CELL_SIZE / 2,
 });
 
 export const gridPx = (gridSize: number) => {
@@ -36,7 +35,7 @@ export const getCellAt = (x: number, y: number, gridSize: number): Cell | null =
   if (cellX > CELL_SIZE || cellY > CELL_SIZE) {
     return null;
   }
-  return { row, col };
+  return { r: row, c: col };
 };
 
 export const buildWallSet = (walls: Wall[]): Set<string> => {

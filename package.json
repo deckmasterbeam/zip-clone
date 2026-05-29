@@ -8,6 +8,11 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "solve": "node --experimental-strip-types scripts/solve-puzzles.ts",
+    "status": "node --experimental-strip-types scripts/puzzle-status.ts",
+    "test": "vitest run",
+    "reformat": "node --experimental-strip-types scripts/reformat-puzzles.ts",
+    "format": "prettier --write .",
     "prepare": "husky"
   },
   "dependencies": {
@@ -31,7 +36,8 @@
     "prettier": "^3.8.2",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.58.0",
-    "vite": "^8.0.4"
+    "vite": "^8.0.4",
+    "vitest": "^4.1.7"
   },
   "lint-staged": {
     "*.{ts,tsx}": "prettier --write"

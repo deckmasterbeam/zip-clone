@@ -4,25 +4,20 @@ import { DesignerGrid, type DesignerMode } from './DesignerGrid';
 
 const toPuzzleTs = (name: string, gridSize: number, waypoints: Cell[], walls: Wall[]): string => {
   const id = crypto.randomUUID();
-  const waypointsStr = waypoints.map((w) => `      { row: ${w.row}, col: ${w.col} },`).join('\n');
+  const waypointsStr = waypoints.map((w) => `{ r: ${w.r}, c: ${w.c} }`).join(', ');
 
   const wallsStr =
     walls.length === 0
       ? ''
       : `\n    walls: [\n${walls
-          .map(
-            ([a, b]) =>
-              `      [{ row: ${a.row}, col: ${a.col} }, { row: ${b.row}, col: ${b.col} }],`
-          )
+          .map(([a, b]) => `      [{ r: ${a.r}, c: ${a.c} }, { r: ${b.r}, c: ${b.c} }],`)
           .join('\n')}\n    ],`;
 
   return `{
     id: '${id}',
     name: '${name}',
     gridSize: ${gridSize},
-    waypoints: [
-${waypointsStr}
-    ],${wallsStr}
+    waypoints: [${waypointsStr}],${wallsStr}
   },`;
 };
 
@@ -39,9 +34,9 @@ export const Designer = ({ onClose }: { onClose: () => void }) => {
 
   const handleGridSizeChange = (size: number) => {
     setGridSize(size);
-    setWaypoints((prev) => prev.filter((w) => w.row < size && w.col < size));
+    setWaypoints((prev) => prev.filter((w) => w.r < size && w.c < size));
     setWalls((prev) =>
-      prev.filter(([a, b]) => a.row < size && a.col < size && b.row < size && b.col < size)
+      prev.filter(([a, b]) => a.r < size && a.c < size && b.r < size && b.c < size)
     );
   };
 
