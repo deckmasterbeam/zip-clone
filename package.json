@@ -10,6 +10,7 @@
     "preview": "vite preview",
     "solve": "node --experimental-strip-types scripts/solve-puzzles.ts",
     "status": "node --experimental-strip-types scripts/puzzle-status.ts",
+    "visualize": "node --experimental-strip-types scripts/visualize-solution.ts",
     "test": "vitest run",
     "reformat": "node --experimental-strip-types scripts/reformat-puzzles.ts",
     "format": "prettier --write .",
