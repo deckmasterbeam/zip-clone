@@ -4,7 +4,7 @@
 // Usage:
 //   npm run reformat
 
-import { writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { PUZZLES } from '../src/puzzles.ts';
@@ -13,24 +13,11 @@ import { formatPuzzle } from './puzzle-format.ts';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const PUZZLES_PATH = join(__dirname, '../src/puzzles.ts');
 
-const FILE_HEADER = `export type Cell = { r: number; c: number };
-
-export type Wall = [Cell, Cell];
-
-type Solution = Cell[];
-
-export type Puzzle = {
-  id: string;
-  name: string;
-  gridSize: number;
-  waypoints: Cell[];
-  walls?: Wall[];
-  solutions?: Solution[];
-};
-
-// prettier-ignore
-export const PUZZLES: Puzzle[] = [
-`;
+const existing = readFileSync(PUZZLES_PATH, 'utf-8');
+const marker = 'export const PUZZLES: Puzzle[] = [';
+const markerIndex = existing.indexOf(marker);
+if (markerIndex === -1) throw new Error(`Could not find "${marker}" in puzzles.ts`);
+const FILE_HEADER = existing.slice(0, markerIndex + marker.length) + '\n';
 
 const content = FILE_HEADER + PUZZLES.map(formatPuzzle).join('\n') + '\n];\n';
 

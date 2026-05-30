@@ -114,9 +114,9 @@ export const GameGrid = ({
                 key={i}
                 className="wall"
                 style={{
-                  left: left.c * (CELL_SIZE + GAP),
+                  left: left.c * (CELL_SIZE + GAP) - GAP / 2,
                   top: (top.r + 1) * (CELL_SIZE + GAP) - GAP / 2 - WALL_THICKNESS / 2,
-                  width: CELL_SIZE,
+                  width: CELL_SIZE + GAP,
                   height: WALL_THICKNESS,
                 }}
               />
@@ -128,9 +128,9 @@ export const GameGrid = ({
                 className="wall"
                 style={{
                   left: (left.c + 1) * (CELL_SIZE + GAP) - GAP / 2 - WALL_THICKNESS / 2,
-                  top: top.r * (CELL_SIZE + GAP),
+                  top: top.r * (CELL_SIZE + GAP) - GAP / 2,
                   width: WALL_THICKNESS,
-                  height: CELL_SIZE,
+                  height: CELL_SIZE + GAP,
                 }}
               />
             );
