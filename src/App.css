@@ -114,7 +114,6 @@
 .wall {
   position: absolute;
   background: var(--dark-surface);
-  border-radius: 3px;
   z-index: 4;
   pointer-events: none;
 }

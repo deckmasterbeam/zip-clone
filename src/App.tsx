@@ -7,6 +7,7 @@ import { GameGrid } from './GameGrid';
 import { Designer } from './Designer';
 import { DEV } from './env';
 import { loadRecord, saveRecord, saveRecordRemote, type PuzzleRecord } from './saveLoadScore';
+import { getPuzzleIndexFromUrl, setPuzzleInUrl } from './puzzleUrl';
 
 type AppMode = 'play' | 'designer';
 
@@ -48,13 +49,17 @@ const useTimer = (running: boolean) => {
   return { elapsed, reset };
 };
 
+const initialPuzzleIndex = getPuzzleIndexFromUrl();
+
 const App = () => {
   const [appMode, setAppMode] = useState<AppMode>('play');
   const [gameState, setGameState] = useState<GameState>('idle');
-  const [levelIndex, setLevelIndex] = useState(0);
+  const [levelIndex, setLevelIndex] = useState(initialPuzzleIndex);
   const [path, setPath] = useState<Cell[]>([]);
   const [isDragging, setIsDragging] = useState(false);
-  const [record, setRecord] = useState<PuzzleRecord | null>(() => loadRecord(PUZZLES[0].id));
+  const [record, setRecord] = useState<PuzzleRecord | null>(
+    loadRecord(PUZZLES[initialPuzzleIndex].id)
+  );
   const hasRetractedRef = useRef(false);
   const gridSizerRef = useRef<HTMLDivElement>(null);
   const [availableWidth, setAvailableWidth] = useState(9999);
@@ -63,10 +68,12 @@ const App = () => {
     if (!gridSizerRef.current) {
       return;
     }
-    const ro = new ResizeObserver(([e]) => setAvailableWidth(e.contentRect.width));
+    const ro = new ResizeObserver(([e]) => {
+      if (e.contentRect.width > 0) setAvailableWidth(e.contentRect.width);
+    });
     ro.observe(gridSizerRef.current);
     return () => ro.disconnect();
-  }, []);
+  }, [appMode]);
 
   const puzzle = PUZZLES[levelIndex];
   const { gridSize, waypoints } = puzzle;
@@ -97,6 +104,7 @@ const App = () => {
   };
 
   const selectLevel = (i: number) => {
+    setPuzzleInUrl(i);
     setLevelIndex(i);
     setPath([]);
     setIsDragging(false);
@@ -180,7 +188,13 @@ const App = () => {
                   Reset
                 </button>
                 {DEV && (
-                  <button className="btn-designer" onClick={() => setAppMode('designer')}>
+                  <button
+                    className="btn-designer"
+                    onClick={() => {
+                      reset();
+                      setAppMode('designer');
+                    }}
+                  >
                     Designer
                   </button>
                 )}

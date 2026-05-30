@@ -20,6 +20,7 @@ When runnning locally, a designer mode is avalible so that I can design/recreate
   - [ ] Febuary 2026
   - [x] March 2026
   - [In progress] April 2026
+  - [In progress] May 2026
 
 - [ ] Rendering wall corners
 
